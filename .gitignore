@@ -1,0 +1,37 @@
+# NetBeans specific
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+# NetBeans specific
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+# Tomcat
+server/
+target/
+tomcat*/
+
+# Ivy
+.ivy/
+ivy-*.xml.md5
+ivy-*.xml.sha1
+lib/
+repository/
+
+# Logs and databases
+*.log
+*.sqlite
+*.db
+
+# Java annotation processor
+.apt_generated/
