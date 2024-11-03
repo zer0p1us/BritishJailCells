@@ -1,18 +1,14 @@
 # NetBeans specific
 nbproject/private/
+nbproject/Makefile-*.mk
+nbproject/Package-*.bash
+nbproject/build-impl.xml
+nbproject/genfiles.properties
 build/
 nbbuild/
 dist/
 nbdist/
-nbactions.xml
-nb-configuration.xml
-
-# NetBeans specific
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
+.nb-gradle/
 nbactions.xml
 nb-configuration.xml
 
@@ -25,7 +21,6 @@ tomcat*/
 .ivy/
 ivy-*.xml.md5
 ivy-*.xml.sha1
-lib/
 repository/
 
 # Logs and databases
