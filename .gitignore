@@ -2,6 +2,8 @@
 **/nbproject/private/
 **/nbproject/Makefile-*.mk
 **/nbproject/Package-*.bash
+**/nbproject/build-impl.xml
+**/nbproject/genfiles.properties
 build/
 nbbuild/
 dist/
