@@ -82,12 +82,6 @@ public class Search {
         }
         
         String json = HttpToJson.getJson(con);
-//        System.out.println(json);
-        
-//        Gson gson = new Gson();
-//        Rooms rooms = gson.fromJson(json, Rooms.class);
-//        System.out.println("test: ");
-//        System.out.print(gson.toJson(rooms));
         
         return json;
     }
