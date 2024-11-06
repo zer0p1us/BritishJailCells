@@ -1,4 +1,4 @@
-package com.zer0p1us.endpoints.models;
+package com.zer0p1us.endpoints.models.rooms;
 
 /**
  *
