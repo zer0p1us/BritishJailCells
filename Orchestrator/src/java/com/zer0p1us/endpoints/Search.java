@@ -1,19 +1,9 @@
 package com.zer0p1us.endpoints;
 
 import com.google.gson.Gson;
-import com.zer0p1us.core.HttpToJson;
-import com.zer0p1us.endpoints.models.Rooms;
+import com.zer0p1us.core.WeatherService;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -46,44 +36,15 @@ public class Search {
      * @param lon longitude
      * @param lat latitude
      * @return an instance of java.lang.String
-     * @throws java.net.MalformedURLException
-     * @throws java.net.URISyntaxException
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson(@QueryParam("lon") float lon, @QueryParam("lat") float lat) throws MalformedURLException, IOException, URISyntaxException {
-        System.out.println("lon="+lon);
-        System.out.println("lat="+lat);
-        
-        Map<String, String> params = new HashMap<>();
-        params.put("product", "civillight");
-        params.put("unit", "metric");
-        params.put("output", "json");
-        params.put("lang", "en");
-        params.put("lat", String.valueOf(lat));
-        params.put("lon", String.valueOf(lon));
-        
-        String formatedParams = params.entrySet().stream().map(entry -> {
-            try {
-                return URLEncoder.encode(entry.getKey(), "UTF-8") + "=" +
-                       URLEncoder.encode(entry.getValue(), "UTF-8");
-            } catch (UnsupportedEncodingException e) {
-                throw new RuntimeException(e);
-            }
-        }).collect(Collectors.joining("&"));
-        
-        URL url = new URI("http://www.7timer.info/bin/api.pl?" + formatedParams).toURL();
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("GET");
-        con.connect();
-        
-        if (con.getResponseCode() != 200) {
-            System.out.println(con.getResponseCode());
-        }
-        
-        String json = HttpToJson.getJson(con);
-        
-        return json;
+    public String getJson(@QueryParam("lat") float lat, @QueryParam("lon") float lon) throws URISyntaxException, IOException {
+        // weather for the area, update to be weather for rooms and room data
+        WeatherService weatherData = new WeatherService(lat, lon);
+        weatherData.get7TimerData();
+        Gson gson = new Gson();
+        return gson.toJson(weatherData);
     }
 
     /**
