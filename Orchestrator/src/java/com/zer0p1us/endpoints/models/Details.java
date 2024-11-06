@@ -1,4 +1,4 @@
-package com.zer0p1us.endpoints.models.room;
+package com.zer0p1us.endpoints.models;
 
 import java.util.ArrayList;
 
