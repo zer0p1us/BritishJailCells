@@ -22,8 +22,8 @@ public class WeatherService {
     private float lat;
     private float lon;
     
-    private String currentWeather;
-    private String averageWeather;
+    private float currentTemp;
+    private float averageTemp;
     
     public WeatherService(float lat, float lon) {
         this.lat = lat;
@@ -32,7 +32,7 @@ public class WeatherService {
     
     public void get7TimerData() throws URISyntaxException, IOException {
         Map<String, String> params = new HashMap<>();
-        params.put("product", "civillight");
+        params.put("product", "civil");
         params.put("unit", "metric");
         params.put("output", "json");
         params.put("lang", "en");
@@ -58,16 +58,13 @@ public class WeatherService {
         
         Root root = gson.fromJson(json, Root.class);
         if (root.dataseries.size() == 0) { return; }
-        currentWeather = root.dataseries.get(0).weather;
-        averageWeather = root.dataseries.stream()
-                .collect(Collectors.groupingBy(classifier -> classifier.weather, Collectors.counting()))
-                .entrySet().stream()
-                .max(Map.Entry.comparingByKey())
-                .get().getKey();
-        
+        currentTemp = root.dataseries.get(0).temp2m;
+        averageTemp = (float) root.dataseries.stream()
+                .mapToInt(ds -> ds.temp2m)
+                .average()
+                .orElse(0.0f);
     }
     
-    public String getCurrentWeather() { return this.currentWeather; }
-    public String getAverageWeather() { return this.averageWeather; }
     
+        
 }
