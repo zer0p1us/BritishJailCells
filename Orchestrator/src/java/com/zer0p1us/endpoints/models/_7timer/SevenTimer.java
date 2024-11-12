@@ -6,7 +6,7 @@ import java.util.ArrayList;
  *
  * @author zer0p1us
  */
-public class Root{
+public class SevenTimer{
     public String product;
     public String init;
     public ArrayList<Dataseries> dataseries;

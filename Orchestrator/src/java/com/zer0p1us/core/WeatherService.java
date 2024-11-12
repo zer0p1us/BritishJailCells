@@ -1,7 +1,7 @@
 package com.zer0p1us.core;
 
 import com.google.gson.Gson;
-import com.zer0p1us.endpoints.models._7timer.Root;
+import com.zer0p1us.endpoints.models._7timer.SevenTimer;
 import com.zer0p1us.endpoints.models.open_meteo.openMeteo;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -60,7 +60,7 @@ public class WeatherService {
         String json = HttpToJson.getJson(con);
         Gson gson = new Gson();
         
-        Root root = gson.fromJson(json, Root.class);
+        SevenTimer root = gson.fromJson(json, SevenTimer.class);
         if (root.dataseries.size() == 0) { return; }
         currentTemp = root.dataseries.get(0).temp2m;
         averageTemp = (float) root.dataseries.stream()
