@@ -1,4 +1,4 @@
-package com.zer0p1us.endpoints.models._7timer;
+package com.zer0p1us.endpoints.models.SevenTimer;
 
 /**
  *

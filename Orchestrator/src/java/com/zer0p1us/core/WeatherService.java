@@ -1,7 +1,7 @@
 package com.zer0p1us.core;
 
 import com.google.gson.Gson;
-import com.zer0p1us.endpoints.models._7timer.SevenTimer;
+import com.zer0p1us.endpoints.models.SevenTimer.SevenTimer;
 import com.zer0p1us.endpoints.models.open_meteo.openMeteo;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
