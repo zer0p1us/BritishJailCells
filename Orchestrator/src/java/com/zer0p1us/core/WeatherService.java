@@ -35,7 +35,7 @@ public class WeatherService {
         this.lon = lon;
     }
     
-    private void get7TimerData() throws URISyntaxException, IOException, NoDataException {
+    private void load7TimerData() throws URISyntaxException, IOException, NoDataException {
         Map<String, String> params = new HashMap<>();
         params.put("product", "civil");
         params.put("unit", "metric");
@@ -71,7 +71,7 @@ public class WeatherService {
                 .orElse(0.0f);
     }
     
-    private void getOpenMeteoData() throws URISyntaxException, ProtocolException, IOException, NoDataException {
+    private void loadOpenMeteoData() throws URISyntaxException, ProtocolException, IOException, NoDataException {
         Map<String, String> params = new HashMap<>();
         params.put("hourly", "temperature_2m");
         params.put("current", "temperature_2m");
@@ -101,9 +101,9 @@ public class WeatherService {
         averageTemp = (float) Arrays.stream(openMeteo.hourly.temperature_2m).average().orElse(0);
     }
     
-    public void getWeather() {
+    public void loadWeather() {
         try {
-            this.get7TimerData();
+            this.load7TimerData();
             return;
         } catch (Exception e) {
             System.err.println("7Timer api call failed due to: "+e.toString());
@@ -111,7 +111,7 @@ public class WeatherService {
         
         
         try {
-            this.getOpenMeteoData();
+            this.loadOpenMeteoData();
             return;
         } catch (Exception e) {
             System.err.println("OpenMeteo api call failed due to: "+e.toString());
