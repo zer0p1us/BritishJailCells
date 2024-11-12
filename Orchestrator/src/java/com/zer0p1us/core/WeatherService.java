@@ -1,8 +1,9 @@
 package com.zer0p1us.core;
 
 import com.google.gson.Gson;
+import com.zer0p1us.core.misc.NoDataException;
 import com.zer0p1us.endpoints.models.SevenTimer.SevenTimer;
-import com.zer0p1us.endpoints.models.open_meteo.openMeteo;
+import com.zer0p1us.endpoints.models.open_meteo.OpenMeteo;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
@@ -34,7 +35,7 @@ public class WeatherService {
         this.lon = lon;
     }
     
-    public void get7TimerData() throws URISyntaxException, IOException {
+    private void get7TimerData() throws URISyntaxException, IOException, NoDataException {
         Map<String, String> params = new HashMap<>();
         params.put("product", "civil");
         params.put("unit", "metric");
@@ -58,18 +59,19 @@ public class WeatherService {
         con.connect();
         
         String json = HttpToJson.getJson(con);
+        if (json.isEmpty()) { throw new NoDataException("7Timer api call "+url.toString()+" json response is empty"); }
         Gson gson = new Gson();
         
-        SevenTimer root = gson.fromJson(json, SevenTimer.class);
-        if (root.dataseries.size() == 0) { return; }
-        currentTemp = root.dataseries.get(0).temp2m;
-        averageTemp = (float) root.dataseries.stream()
+        SevenTimer sevenTimer = gson.fromJson(json, SevenTimer.class);
+        if (sevenTimer.dataseries.size() == 0) { throw new NoDataException("7Timer json response dataseries is empty"); }
+        currentTemp = sevenTimer.dataseries.get(0).temp2m;
+        averageTemp = (float) sevenTimer.dataseries.stream()
                 .mapToInt(ds -> ds.temp2m)
                 .average()
                 .orElse(0.0f);
     }
     
-    public void getOpenMeteo() throws URISyntaxException, ProtocolException, IOException {
+    private void getOpenMeteoData() throws URISyntaxException, ProtocolException, IOException, NoDataException {
         Map<String, String> params = new HashMap<>();
         params.put("hourly", "temperature_2m");
         params.put("current", "temperature_2m");
@@ -91,11 +93,29 @@ public class WeatherService {
         con.connect();
         
         String json = HttpToJson.getJson(con);
+        if (json.isEmpty()) { throw new NoDataException("OpenMeteo api call "+url.toString()+" json response is empty"); }
         Gson gson = new Gson();
         
-        openMeteo root = gson.fromJson(json, openMeteo.class);
-        currentTemp = (float) root.current.temperature2M;
-        averageTemp = (float) Arrays.stream(root.hourly.temperature2M).average().orElse(0);
+        OpenMeteo openMeteo = gson.fromJson(json, OpenMeteo.class);
+        currentTemp = (float) openMeteo.current.temperature_2m;
+        averageTemp = (float) Arrays.stream(openMeteo.hourly.temperature_2m).average().orElse(0);
+    }
+    
+    public void getWeather() {
+        try {
+            this.get7TimerData();
+            return;
+        } catch (Exception e) {
+            System.err.println("7Timer api call failed due to: "+e.toString());
+        }
+        
+        
+        try {
+            this.getOpenMeteoData();
+            return;
+        } catch (Exception e) {
+            System.err.println("OpenMeteo api call failed due to: "+e.toString());
+        }
     }
     
     

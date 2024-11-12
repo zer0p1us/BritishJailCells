@@ -7,6 +7,6 @@ package com.zer0p1us.endpoints.models.open_meteo;
 public class Current {
     public String time;
     public long interval;
-    public double temperature2M;
+    public double temperature_2m;
 
 }

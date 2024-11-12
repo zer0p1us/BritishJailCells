@@ -6,6 +6,6 @@ package com.zer0p1us.endpoints.models.open_meteo;
  */
 public class Hourly {
     public String[] time;
-    public double[] temperature2M;
+    public double[] temperature_2m;
 
 }

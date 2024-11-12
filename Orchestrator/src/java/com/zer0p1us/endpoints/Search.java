@@ -42,7 +42,7 @@ public class Search {
     public String getJson(@QueryParam("lat") float lat, @QueryParam("lon") float lon) throws URISyntaxException, IOException {
         // weather for the area, update to be weather for rooms and room data
         WeatherService weatherData = new WeatherService(lat, lon);
-        weatherData.get7TimerData();
+        weatherData.getWeather();
         Gson gson = new Gson();
         return gson.toJson(weatherData);
     }
