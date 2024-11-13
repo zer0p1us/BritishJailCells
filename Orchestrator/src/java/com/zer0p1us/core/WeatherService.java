@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 /**
  *
- * @author siman
+ * @author zer0p1us
  */
 public class WeatherService {
     
