@@ -28,7 +28,7 @@ public class WeatherService {
     private transient float lon;
     
     private float currentTemp;
-    private float averageTemp;
+    private float sevenDayAverageTemp;
     
     public WeatherService(float lat, float lon) {
         this.lat = lat;
@@ -65,7 +65,7 @@ public class WeatherService {
         SevenTimer sevenTimer = gson.fromJson(json, SevenTimer.class);
         if (sevenTimer.dataseries.size() == 0) { throw new NoDataException("7Timer json response dataseries is empty"); }
         currentTemp = sevenTimer.dataseries.get(0).temp2m;
-        averageTemp = (float) sevenTimer.dataseries.stream()
+        sevenDayAverageTemp = (float) sevenTimer.dataseries.stream()
                 .mapToInt(ds -> ds.temp2m)
                 .average()
                 .orElse(0.0f);
@@ -98,7 +98,7 @@ public class WeatherService {
         
         OpenMeteo openMeteo = gson.fromJson(json, OpenMeteo.class);
         currentTemp = (float) openMeteo.current.temperature_2m;
-        averageTemp = (float) Arrays.stream(openMeteo.hourly.temperature_2m).average().orElse(0);
+        sevenDayAverageTemp = (float) Arrays.stream(openMeteo.hourly.temperature_2m).average().orElse(0);
     }
     
     public void loadWeather() {
