@@ -24,8 +24,8 @@ import java.util.stream.Collectors;
  */
 public class WeatherService {
     
-    private float lat;
-    private float lon;
+    private transient float lat;
+    private transient float lon;
     
     private float currentTemp;
     private float averageTemp;
