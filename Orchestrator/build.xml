@@ -68,4 +68,12 @@
     nbproject/build-impl.xml file. 
 
     -->
+
+    <!-- Add this target before the imported build-impl.xml -->
+    <target name="-pre-compile">
+        <!-- Copy config.properties to the build classes directory -->
+        <copy file="config.properties" 
+              todir="${build.classes.dir}" 
+              failonerror="false"/>
+    </target>
 </project>

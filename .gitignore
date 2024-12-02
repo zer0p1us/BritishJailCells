@@ -28,3 +28,6 @@ repository/
 
 # Java annotation processor
 .apt_generated/
+
+# Database config
+config.properties
