@@ -1,17 +1,13 @@
 package com.zer0p1us.core;
 
 import com.zer0p1us.core.misc.ConfigReader;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServlet;
 
 /**
  *
