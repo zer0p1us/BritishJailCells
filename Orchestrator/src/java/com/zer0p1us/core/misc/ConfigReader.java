@@ -13,8 +13,8 @@ public class ConfigReader {
 
     public ConfigReader() {
         properties = new Properties();
-        try (InputStream input = ConfigReader.class.getClassLoader().getResourceAsStream("config.properties")) { 
-            // Load the properties file 
+        try (InputStream input = ConfigReader.class.getClassLoader().getResourceAsStream("config.properties")) {
+            // Load the properties file
             properties.load(input);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -37,7 +37,7 @@ public class ConfigReader {
     public String getDatabasePassword() {
         return getProperty("db.password");
     }
-    
+
     public String getDatabaseTimeout() {
         return getProperty("db.loginTimeout");
     }

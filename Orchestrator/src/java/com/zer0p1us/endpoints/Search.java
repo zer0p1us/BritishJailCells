@@ -1,9 +1,8 @@
 package com.zer0p1us.endpoints;
 
 import com.google.gson.Gson;
-import com.zer0p1us.core.WeatherService;
-import java.io.IOException;
-import java.net.URISyntaxException;
+import com.zer0p1us.core.Database;
+import com.zer0p1us.endpoints.models.rooms.Rooms;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -33,26 +32,15 @@ public class Search {
 
     /**
      * Retrieves representation of an instance of com.zer0p1us.endpoints.Search
-     * @param lon longitude
-     * @param lat latitude
+     * @param searchTerms Search terms
      * @return an instance of java.lang.String
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson(@QueryParam("lat") float lat, @QueryParam("lon") float lon) throws URISyntaxException, IOException {
-        // weather for the area, update to be weather for rooms and room data
-        WeatherService weatherData = new WeatherService(lat, lon);
-        weatherData.loadWeather();
+    public String getJson(@QueryParam("searchTerms") String searchTerms) {
+        Database db = new Database();
+        Rooms rooms = db.GetRooms(searchTerms);
         Gson gson = new Gson();
-        return gson.toJson(weatherData);
-    }
-
-    /**
-     * PUT method for updating or creating an instance of Search
-     * @param content representation for the resource
-     */
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(String content) {
+        return gson.toJson(rooms);
     }
 }
