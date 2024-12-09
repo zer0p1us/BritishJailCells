@@ -66,6 +66,7 @@ INSERT INTO languages (language_name) VALUES
 CREATE TABLE applications (
     application_ref NVARCHAR(100) NOT NULL,
     room_id INT NOT NULL,
+    status NVARCHAR(20) NOT NULL,
     PRIMARY KEY (application_ref, room_id),
     FOREIGN KEY (room_id) REFERENCES rooms(room_id)
 );
