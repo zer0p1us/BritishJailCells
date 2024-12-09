@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author siman
+ * @author zer0p1us
  */
 public class Rooms {
     public ArrayList<Room> rooms;

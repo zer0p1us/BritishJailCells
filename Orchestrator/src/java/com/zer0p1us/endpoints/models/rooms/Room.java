@@ -13,5 +13,5 @@ public class Room{
     public Details details;
     public int price_per_month_gbp;
     public String availability_date;
-    public ArrayList<String> spoken_languages;
+    public String[] spoken_languages;
 }

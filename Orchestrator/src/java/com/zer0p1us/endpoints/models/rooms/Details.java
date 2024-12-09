@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class Details{
     public boolean furnished;
-    public ArrayList<String> amenities;
+    public String[] amenities;
     public boolean live_in_landlord;
     public int shared_with;
     public boolean bills_included;
