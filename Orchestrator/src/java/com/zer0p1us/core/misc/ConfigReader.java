@@ -15,10 +15,7 @@ public class ConfigReader {
         properties = new Properties();
         try (InputStream input = ConfigReader.class.getClassLoader().getResourceAsStream("config.properties")) { 
             // Load the properties file 
-            properties.load(input); 
-            // Read properties 
-            String propertyName = properties.getProperty("propertyName"); 
-            System.out.println("Property Value: " + propertyName); 
+            properties.load(input);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
