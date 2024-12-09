@@ -27,17 +27,6 @@ public class Cancel {
     }
 
     /**
-     * Retrieves representation of an instance of com.zer0p1us.endpoints.Cancel
-     * @return an instance of java.lang.String
-     */
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getJson() {
-        //TODO return proper representation object
-        return "Cancel end point not implemented";
-    }
-
-    /**
      * PUT method for updating or creating an instance of Cancel
      * @param content representation for the resource
      */

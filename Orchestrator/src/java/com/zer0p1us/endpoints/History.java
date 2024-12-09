@@ -36,13 +36,4 @@ public class History {
         //TODO return proper representation object
         return "History endpoint not implemented";
     }
-
-    /**
-     * PUT method for updating or creating an instance of History
-     * @param content representation for the resource
-     */
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(String content) {
-    }
 }

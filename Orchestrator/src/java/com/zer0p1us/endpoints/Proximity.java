@@ -45,13 +45,4 @@ public class Proximity {
         Gson gson = new Gson();
         return gson.toJson(proximityService, ProximityService.class);
     }
-
-    /**
-     * PUT method for updating or creating an instance of Proximity
-     * @param content representation for the resource
-     */
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(String content) {
-    }
 }

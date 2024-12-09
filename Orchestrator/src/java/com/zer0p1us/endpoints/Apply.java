@@ -27,17 +27,6 @@ public class Apply {
     }
 
     /**
-     * Retrieves representation of an instance of com.zer0p1us.endpoints.Apply
-     * @return an instance of java.lang.String
-     */
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getJson() {
-        //TODO return proper representation object
-        return "Apply endpoint not implemented";
-    }
-
-    /**
      * PUT method for updating or creating an instance of Apply
      * @param content representation for the resource
      */
