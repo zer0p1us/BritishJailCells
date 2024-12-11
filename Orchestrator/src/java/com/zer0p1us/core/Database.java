@@ -72,7 +72,7 @@ public class Database {
         Rooms rooms = new Rooms();
         rooms.rooms = new ArrayList<Room>();
         
-        StringBuilder execStatement = new StringBuilder("EXEC SearchRoomDetails");
+        StringBuilder statement = new StringBuilder("EXEC SearchRoomDetails");
         
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("@SearchTerms", searchTerms);
@@ -85,21 +85,21 @@ public class Database {
         
         parameters.forEach((key, value) -> {
             if (value != null) {
-                execStatement.append(" ").append(key).append(" = ");
+                statement.append(" ").append(key).append(" = ");
                 if (value instanceof String) {
-                    execStatement.append("'").append(value).append("',");
+                    statement.append("'").append(value).append("',");
                 } else { 
-                    execStatement.append(value).append(",");
+                    statement.append(value).append(",");
                 }
             }
         });
         
         // Remove the trailing comma if parameters were added
-        if (execStatement.charAt(execStatement.length() - 1) == ',') {
-            execStatement.deleteCharAt(execStatement.length() - 1);
+        if (statement.charAt(statement.length() - 1) == ',') {
+            statement.deleteCharAt(statement.length() - 1);
         }
-        System.out.println(execStatement.toString());
-        ResultSet resultSet = RunQuery(execStatement.toString());
+        System.out.println(statement.toString());
+        ResultSet resultSet = RunQuery(statement.toString());
         
         try {            
             while (resultSet.next()) {
