@@ -11,6 +11,8 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,7 +36,7 @@ public class Database {
                 + "loginTimeout=" + reader.getDatabaseTimeout();
         
     }
-    
+
     private ResultSet RunQuery(String sqlQuery) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -48,16 +50,50 @@ public class Database {
             return null;
         }
     }
-    
+
     /**
      * 
-     * @param conditions where close for data
-     * @return Rooms initialised with all the data
+     * @param searchTerms search terms
+     * @param maxMonthlyRent max monthly rent
+     * @param furnished furnished
+     * @param liveInLandlord live in landlord
+     * @param maxSharedWith max shared with
+     * @param billsIncluded bills included
+     * @param bathroomShared bathroom shared
+     * @return 
      */
-    public Rooms GetRooms(String conditions) {
+    public Rooms GetRooms(String searchTerms, Integer maxMonthlyRent, Boolean furnished, Boolean liveInLandlord, Integer maxSharedWith, Boolean billsIncluded, Boolean bathroomShared) {
         Rooms rooms = new Rooms();
         rooms.rooms = new ArrayList<Room>();
-        ResultSet resultSet = RunQuery("SELECT * FROM [dbo].[vw_room_details]");
+        
+        StringBuilder execStatement = new StringBuilder("EXEC SearchRoomDetails");
+        
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("@SearchTerms", searchTerms);
+        parameters.put("@Furnished", furnished);
+        parameters.put("@LiveInLandlord", liveInLandlord);
+        parameters.put("@MaxSharedWith", maxSharedWith);
+        parameters.put("@BillsIncluded", billsIncluded);
+        parameters.put("@BathroomShared", bathroomShared);
+        parameters.put("@MaxMonthlyRent", maxMonthlyRent);
+        
+        parameters.forEach((key, value) -> {
+            if (value != null) {
+                execStatement.append(" ").append(key).append(" = ");
+                if (value instanceof String) {
+                    execStatement.append("'").append(value).append("',");
+                } else { 
+                    execStatement.append(value).append(",");
+                }
+            }
+        });
+        
+        // Remove the trailing comma if parameters were added
+        if (execStatement.charAt(execStatement.length() - 1) == ',') {
+            execStatement.deleteCharAt(execStatement.length() - 1);
+        }
+        System.out.println(execStatement.toString());
+        ResultSet resultSet = RunQuery(execStatement.toString());
         
         try {            
             while (resultSet.next()) {
@@ -90,7 +126,6 @@ public class Database {
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
                
         return rooms;
     }
