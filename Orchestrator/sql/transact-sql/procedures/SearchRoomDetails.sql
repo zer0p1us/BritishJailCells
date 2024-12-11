@@ -2,7 +2,7 @@ CREATE OR ALTER PROCEDURE SearchRoomDetails
     @SearchTerms NVARCHAR(MAX) = NULL,
     @Furnished BIT = NULL,
     @LiveInLandlord BIT = NULL,
-    @SharedWith BIT = NULL,
+    @MaxSharedWith INT = NULL,
     @BillsIncluded BIT = NULL,
     @BathroomShared BIT = NULL,
     @MaxPricePerMonth INT = NULL
@@ -27,10 +27,6 @@ BEGIN
     BEGIN
         SET @SQL = @SQL + ' AND live_in_landlord = ' + CAST(@LiveInLandlord AS NVARCHAR);
     END
-    IF @SharedWith IS NOT NULL
-    BEGIN
-        SET @SQL = @SQL + ' AND shared_with = ' + CAST(@SharedWith AS NVARCHAR);
-    END
     IF @BillsIncluded IS NOT NULL
     BEGIN
         SET @SQL = @SQL + ' AND bills_included = ' + CAST(@BillsIncluded AS NVARCHAR);
@@ -44,6 +40,12 @@ BEGIN
     IF @MaxPricePerMonth IS NOT NULL 
     BEGIN
         SET @SQL = @SQL + ' AND price_per_month_gbp <= ' + CAST(@MaxPricePerMonth AS NVARCHAR); 
+    END
+
+    -- Add shared with condition
+    IF @MaxSharedWith IS NOT NULL
+    BEGIN
+        SET @SQL = @SQL + ' AND shared_with <= ' + CAST(@MaxSharedWith AS NVARCHAR);
     END
 
     IF @SearchTerms IS NOT NULL
