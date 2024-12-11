@@ -52,7 +52,7 @@ public class Database {
     }
 
     /**
-     * 
+     * All the params are nullable types, if they are they aren't part of the query
      * @param searchTerms search terms
      * @param maxMonthlyRent max monthly rent
      * @param furnished furnished
@@ -62,7 +62,13 @@ public class Database {
      * @param bathroomShared bathroom shared
      * @return 
      */
-    public Rooms GetRooms(String searchTerms, Integer maxMonthlyRent, Boolean furnished, Boolean liveInLandlord, Integer maxSharedWith, Boolean billsIncluded, Boolean bathroomShared) {
+    public Rooms GetRooms(String searchTerms,
+                          Integer maxMonthlyRent,
+                          Boolean furnished,
+                          Boolean liveInLandlord,
+                          Integer maxSharedWith,
+                          Boolean billsIncluded,
+                          Boolean bathroomShared) {
         Rooms rooms = new Rooms();
         rooms.rooms = new ArrayList<Room>();
         

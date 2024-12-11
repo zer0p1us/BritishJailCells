@@ -37,9 +37,21 @@ public class Search {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson(@QueryParam("searchTerms") String searchTerms, @QueryParam("maxMonthlyRent") Integer maxMonthlyRent, @QueryParam("furnished") Boolean furnished, @QueryParam("liveInLandlord") Boolean liveInLandlord, @QueryParam("maxSharedWith") Integer maxSharedWith, @QueryParam("billsIncluded") Boolean billsIncluded, @QueryParam("bathroomShared") Boolean bathroomShared) {
+    public String getJson(@QueryParam("searchTerms") String searchTerms,
+                          @QueryParam("maxMonthlyRent") Integer maxMonthlyRent,
+                          @QueryParam("furnished") Boolean furnished,
+                          @QueryParam("liveInLandlord") Boolean liveInLandlord,
+                          @QueryParam("maxSharedWith") Integer maxSharedWith,
+                          @QueryParam("billsIncluded") Boolean billsIncluded,
+                          @QueryParam("bathroomShared") Boolean bathroomShared) {
         Database db = new Database();
-        Rooms rooms = db.GetRooms(searchTerms, maxMonthlyRent, furnished, liveInLandlord, maxSharedWith, billsIncluded, bathroomShared);
+        Rooms rooms = db.GetRooms(searchTerms,
+                                  maxMonthlyRent,
+                                  furnished,
+                                  liveInLandlord,
+                                  maxSharedWith,
+                                  billsIncluded,
+                                  bathroomShared);
         Gson gson = new Gson();
         return gson.toJson(rooms);
     }
