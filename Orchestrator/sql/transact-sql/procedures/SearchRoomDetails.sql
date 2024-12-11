@@ -5,7 +5,7 @@ CREATE OR ALTER PROCEDURE SearchRoomDetails
     @MaxSharedWith INT = NULL,
     @BillsIncluded BIT = NULL,
     @BathroomShared BIT = NULL,
-    @MaxPricePerMonth INT = NULL
+    @MaxMonthlyRent INT = NULL
 AS
 BEGIN
     DECLARE @SQL NVARCHAR(MAX); -- Query
@@ -37,9 +37,9 @@ BEGIN
     END
 
     -- Add price condition 
-    IF @MaxPricePerMonth IS NOT NULL 
+    IF @MaxMonthlyRent IS NOT NULL 
     BEGIN
-        SET @SQL = @SQL + ' AND price_per_month_gbp <= ' + CAST(@MaxPricePerMonth AS NVARCHAR); 
+        SET @SQL = @SQL + ' AND price_per_month_gbp <= ' + CAST(@MaxMonthlyRent AS NVARCHAR); 
     END
 
     -- Add shared with condition
