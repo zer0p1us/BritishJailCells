@@ -11,7 +11,7 @@ BEGIN
     DECLARE @SQL NVARCHAR(MAX); -- Query
     DECLARE @Term NVARCHAR(255);
     DECLARE @WhereClause NVARCHAR(MAX) = '';
-    DECLARE @Columns NVARCHAR(MAX) = 'room_id, name, city, county, postcode, price_per_month_gbp, availability_date, amenities, languages';
+    DECLARE @Columns NVARCHAR(MAX) = 'room_id, name, city, county, postcode, furnished, live_in_landlord, shared_with, bills_included, bathroom_shared, price_per_month_gbp, availability_date, amenities, languages';
     DECLARE @ColumnsList NVARCHAR(MAX);
     DECLARE @NextTerm NVARCHAR(255);
 
