@@ -98,7 +98,6 @@ public class Database {
         if (statement.charAt(statement.length() - 1) == ',') {
             statement.deleteCharAt(statement.length() - 1);
         }
-        System.out.println(statement.toString());
         ResultSet resultSet = RunQuery(statement.toString());
         
         try {            
