@@ -52,6 +52,7 @@ public class Search {
                                   maxSharedWith,
                                   billsIncluded,
                                   bathroomShared);
+        //TODO: Get user geo-location to get cords (cache it) -> weather (cache it) & crime stats (cache it)
         Gson gson = new Gson();
         return gson.toJson(rooms);
     }
