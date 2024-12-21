@@ -64,11 +64,11 @@ INSERT INTO languages (language_name) VALUES
 
 -- Room applications
 CREATE TABLE applications (
-    application_ref NVARCHAR(100) NOT NULL,
+    application_ref UNIQUEIDENTIFIER DEFAULT NEWID() PRIMARY KEY,
     room_id INT NOT NULL,
     user_id NVARCHAR(50) NOT NULL,
     status NVARCHAR(20) NOT NULL,
-    PRIMARY KEY (application_ref, room_id),
     FOREIGN KEY (room_id) REFERENCES rooms(room_id)
 );
+
 
