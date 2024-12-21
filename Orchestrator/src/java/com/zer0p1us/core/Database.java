@@ -134,4 +134,14 @@ public class Database {
                
         return rooms;
     }
+    
+    /**
+     * Create new room application for a room and user
+     * @param roomId room id for application
+     * @param userId user id for application, this is really made up by the user
+     */
+    public void ApplyForRoom(String roomId, String userId) {
+        StringBuilder statement = new StringBuilder("EXEC ApplyForRoom @room_id = "+roomId+", @user_id = '"+userId+"';");
+        RunQuery(statement.toString());
+    }
 }
