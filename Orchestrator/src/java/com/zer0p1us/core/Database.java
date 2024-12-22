@@ -70,7 +70,7 @@ public class Database {
                           Boolean billsIncluded,
                           Boolean bathroomShared) {
         Rooms rooms = new Rooms();
-        rooms.rooms = new ArrayList<Room>();
+        ArrayList<Room> tempRooms = new ArrayList<Room>();
         
         StringBuilder statement = new StringBuilder("EXEC SearchRoomDetails");
         
@@ -126,11 +126,14 @@ public class Database {
                 
                 room.spoken_languages = resultSet.getString("languages").split(", ");
                 
-                rooms.rooms.add(room);
+                tempRooms.add(room);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        rooms.rooms = new Room[tempRooms.size()];
+        rooms.rooms = tempRooms.toArray(rooms.rooms);
                
         return rooms;
     }
