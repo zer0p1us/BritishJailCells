@@ -5,7 +5,6 @@ import com.zer0p1us.core.HttpToJson;
 import com.zer0p1us.core.misc.NoDataException;
 import com.zer0p1us.core.misc.Coordinate;
 import com.zer0p1us.endpoints.models.ProjectOSRM.ProjectOSRM;
-import com.zer0p1us.endpoints.models.SevenTimer.SevenTimer;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;

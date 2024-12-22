@@ -7,7 +7,6 @@ import com.zer0p1us.endpoints.models.SevenTimer.SevenTimer;
 import com.zer0p1us.endpoints.models.openMeteo.OpenMeteo;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URI;
