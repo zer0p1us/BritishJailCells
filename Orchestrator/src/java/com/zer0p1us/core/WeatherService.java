@@ -3,7 +3,7 @@ package com.zer0p1us.core;
 import com.google.gson.Gson;
 import com.zer0p1us.core.misc.NoDataException;
 import com.zer0p1us.endpoints.models.SevenTimer.SevenTimer;
-import com.zer0p1us.endpoints.models.open_meteo.OpenMeteo;
+import com.zer0p1us.endpoints.models.openMeteo.OpenMeteo;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;

@@ -1,4 +1,4 @@
-package com.zer0p1us.endpoints.models.open_meteo;
+package com.zer0p1us.endpoints.models.openMeteo;
 
 /**
  *
