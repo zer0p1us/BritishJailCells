@@ -179,4 +179,14 @@ public class Database {
         
         return roomApplications;
     }
+    
+    /**
+     * Cancel room application by application reference
+     * @param applicationRef application reference to cancel
+     */
+    public void CancelApplication(String applicationRef) {
+        StringBuilder statement = new StringBuilder("EXEC UpdateApplicationStatus @application_ref = '"+applicationRef+"', @status = 'cancelled';");
+        ResultSet resultSet = RunQuery(statement.toString());
+        
+    }
 }
