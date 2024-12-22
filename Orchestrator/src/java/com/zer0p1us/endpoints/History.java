@@ -2,7 +2,7 @@ package com.zer0p1us.endpoints;
 
 import com.google.gson.Gson;
 import com.zer0p1us.core.Database;
-import com.zer0p1us.endpoints.models.roomHistory.RoomApplications;
+import com.zer0p1us.endpoints.models.roomApplication.RoomApplications;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;

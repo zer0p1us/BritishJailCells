@@ -1,8 +1,8 @@
 package com.zer0p1us.core;
 
 import com.zer0p1us.core.misc.ConfigReader;
-import com.zer0p1us.endpoints.models.roomHistory.RoomApplication;
-import com.zer0p1us.endpoints.models.roomHistory.RoomApplications;
+import com.zer0p1us.endpoints.models.roomApplication.RoomApplication;
+import com.zer0p1us.endpoints.models.roomApplication.RoomApplications;
 import com.zer0p1us.endpoints.models.rooms.Details;
 import com.zer0p1us.endpoints.models.rooms.Location;
 import com.zer0p1us.endpoints.models.rooms.Room;
