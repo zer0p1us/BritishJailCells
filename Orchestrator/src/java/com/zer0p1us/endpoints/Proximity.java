@@ -1,7 +1,7 @@
 package com.zer0p1us.endpoints;
 
 import com.google.gson.Gson;
-import com.zer0p1us.core.ProximityService;
+import com.zer0p1us.service.ProximityService;
 import com.zer0p1us.core.misc.Coordinate;
 import com.zer0p1us.core.misc.NoDataException;
 import java.io.IOException;
