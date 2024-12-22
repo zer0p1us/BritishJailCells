@@ -1,6 +1,8 @@
 package com.zer0p1us.core;
 
 import com.zer0p1us.core.misc.ConfigReader;
+import com.zer0p1us.endpoints.models.roomHistory.RoomApplication;
+import com.zer0p1us.endpoints.models.roomHistory.RoomApplications;
 import com.zer0p1us.endpoints.models.rooms.Details;
 import com.zer0p1us.endpoints.models.rooms.Location;
 import com.zer0p1us.endpoints.models.rooms.Room;
@@ -146,5 +148,35 @@ public class Database {
     public void ApplyForRoom(String roomId, String userId) {
         StringBuilder statement = new StringBuilder("EXEC ApplyForRoom @room_id = "+roomId+", @user_id = '"+userId+"';");
         RunQuery(statement.toString());
+    }
+    
+    /**
+     * Get room application history by room id
+     * @param roomId room id
+     */
+    public RoomApplications GetRoomHistory(String roomId) {
+        StringBuilder statement = new StringBuilder("EXEC GetRoomHistory @room_id = "+roomId+";");
+        ResultSet resultSet = RunQuery(statement.toString());
+        RoomApplications roomApplications = new RoomApplications();
+        ArrayList<RoomApplication> tempRooms = new ArrayList<RoomApplication>();
+        
+        try {
+            while (resultSet.next()) {
+                RoomApplication roomApplication = new RoomApplication();
+                roomApplication.applicationRef = resultSet.getString("application_ref");
+                roomApplication.roomId = resultSet.getString("room_id");
+                roomApplication.userId = resultSet.getString("user_id");
+                roomApplication.status = resultSet.getString("status");
+                
+                tempRooms.add(roomApplication);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        roomApplications.applications = new RoomApplication[tempRooms.size()];
+        roomApplications.applications = tempRooms.toArray(roomApplications.applications);
+        
+        return roomApplications;
     }
 }
