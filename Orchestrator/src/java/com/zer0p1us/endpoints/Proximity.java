@@ -38,7 +38,7 @@ public class Proximity {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson(@QueryParam("lon0") float lon0, @QueryParam("lat0") float lat0, @QueryParam("lon0") float lon1, @QueryParam("lat1") float lat1) throws URISyntaxException, NoDataException, IOException {
+    public String getJson(@QueryParam("lon0") double lon0, @QueryParam("lat0") double lat0, @QueryParam("lon1") double lon1, @QueryParam("lat1") double lat1) throws URISyntaxException, NoDataException, IOException {
         ProximityService proximityService = new ProximityService();
         ProximityData proximity = proximityService.loadProjectOSRMData(new Coordinates[] {new Coordinates(lon0, lat0), new Coordinates(lon1, lat1)});
         Gson gson = new Gson();
