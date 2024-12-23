@@ -18,7 +18,7 @@ public class HttpToJson {
         String json = "";
         try {
             BufferedReader buf = new BufferedReader( new InputStreamReader(con.getInputStream(), StandardCharsets.UTF_8));
-            String line = buf.readLine(); 
+            String line = buf.readLine();
             while (line != null) {
                 json += line;
                 line = buf.readLine();
