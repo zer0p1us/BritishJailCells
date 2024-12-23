@@ -2,6 +2,7 @@ package com.zer0p1us.service;
 
 import com.google.gson.Gson;
 import com.zer0p1us.core.ApiCall;
+import com.zer0p1us.core.CacheManager;
 import com.zer0p1us.core.HttpToJson;
 import com.zer0p1us.core.misc.NoDataException;
 import com.zer0p1us.endpoints.models.ProjectOSRM.ProjectOSRM;
@@ -15,6 +16,8 @@ import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
@@ -24,8 +27,42 @@ import java.util.stream.Collectors;
 public class ProximityService {
     
     private String primary_api = "http://router.project-osrm.org/route/v1/driving/";
+
+    private static ProximityService instance;
+
+    private CacheManager<Coordinates[], ProximityData> cacheManager;
+
+    // Private constructor to prevent instantiation
+    private ProximityService() {
+        this.cacheManager = new CacheManager();
+    }
+
+    // Thread-safe singleton getter
+    public static synchronized ProximityService getInstance() {
+        if (instance == null) {
+            instance = new ProximityService();
+        }
+        return instance;
+    }
+
+    public ProximityData getProximityData(Coordinates[] Coordinates) {
+        return cacheManager.getOrCompute(Coordinates, this::fetchProximityData);
+    }
+
+    public ProximityData fetchProximityData(Coordinates[] coordinates) {
+        try {
+            return getProjectOSRMData(coordinates);
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(ProximityService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoDataException ex) {
+            Logger.getLogger(ProximityService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ProximityService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return new ProximityData();
+    }
     
-    public ProximityData loadProjectOSRMData(Coordinates[] coordinates) throws URISyntaxException, MalformedURLException, NoDataException, IOException {
+    private ProximityData getProjectOSRMData(Coordinates[] coordinates) throws URISyntaxException, MalformedURLException, NoDataException, IOException {
         Map<String, String> params = new HashMap<>();
         params.put("overview", "false");
         
