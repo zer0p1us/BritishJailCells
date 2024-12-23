@@ -11,8 +11,9 @@ import java.util.logging.Logger;
  * @author zer0p1us
  */
 public class CacheManager<Input, CachedData> {
-    private ConcurrentHashMap<String, CacheEntry<CachedData>> cache = new ConcurrentHashMap<>();
-    private long cacheLifeInMinutes;
+    private final ConcurrentHashMap<String, CacheEntry<CachedData>> cache = new ConcurrentHashMap<>();
+    private final long cacheLifeInMinutes;
+    private static final Logger LOGGER = Logger.getLogger(CacheManager.class.getName());
 
     public CacheManager() {
         this.cacheLifeInMinutes = Duration.ofMinutes(30).getSeconds();
@@ -57,17 +58,20 @@ public class CacheManager<Input, CachedData> {
         if (entry == null) {
             CacheEntry<CachedData> newEntry = new CacheEntry(func.apply(input));
             cache.put(getKey(input), newEntry);
+            LOGGER.info("Created new cache entry with value: " + newEntry.getData().toString());
             return newEntry.getData();
         }
         
         // If entry exists and isn't expired, return it
         if (!entry.isExpired(this.cacheLifeInMinutes)) {
+            LOGGER.info("Cache hit! Returning existing value: " + entry.getData().toString());
             return entry.getData();
         }
         
         // Compute new value
         CachedData value = func.apply(input);
         entry.updateCache(value);
+        LOGGER.info("Updated existing cache entry with new value:" + value.toString());
         
         return value;
     }
