@@ -47,13 +47,13 @@ public class WeatherService {
     
     private WeatherData fetchWeatherData(Coordinates coords) {
         try {
-            return load7TimerData(coords);
+            return get7TimerData(coords);
         } catch (Exception e) {
             System.err.println("7Timer api call failed due to: "+e.toString());
         }
         
         try {
-            return loadOpenMeteoData(coords);
+            return getOpenMeteoData(coords);
         } catch (Exception e) {
             System.err.println("OpenMeteo api call failed due to: "+e.toString());
         }
@@ -61,7 +61,7 @@ public class WeatherService {
         return new WeatherData();
     }
 
-    private WeatherData load7TimerData(Coordinates coords) throws NoDataException {
+    private WeatherData get7TimerData(Coordinates coords) throws NoDataException {
         Map<String, String> params = new HashMap<>();
         params.put("unit", "metric");
         params.put("output", "json");
@@ -85,7 +85,7 @@ public class WeatherService {
         return data;
     }
     
-    private WeatherData loadOpenMeteoData(Coordinates coords) throws NoDataException {
+    private WeatherData getOpenMeteoData(Coordinates coords) throws NoDataException {
         Map<String, String> params = new HashMap<>();
         params.put("hourly", "temperature_2m");
         params.put("current", "temperature_2m");
