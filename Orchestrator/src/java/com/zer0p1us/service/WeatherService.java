@@ -19,12 +19,11 @@ import java.util.Map;
  */
 public class WeatherService {
     
-    private String primary_api = "http://www.7timer.info/bin/api.pl?";
+    private String primary_api = "http://www.7timer.info/bin/civil.php?";
     private String secondary_api = "https://api.open-meteo.com/v1/forecast?";
     
     private WeatherData load7TimerData(Coordinates coords) throws NoDataException {
         Map<String, String> params = new HashMap<>();
-        params.put("product", "civil");
         params.put("unit", "metric");
         params.put("output", "json");
         params.put("lang", "en");
