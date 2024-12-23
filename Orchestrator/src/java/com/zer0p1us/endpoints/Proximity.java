@@ -2,8 +2,9 @@ package com.zer0p1us.endpoints;
 
 import com.google.gson.Gson;
 import com.zer0p1us.service.ProximityService;
-import com.zer0p1us.core.misc.Coordinate;
 import com.zer0p1us.core.misc.NoDataException;
+import com.zer0p1us.endpoints.models.Coordinates;
+import com.zer0p1us.endpoints.models.ProximityData;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import javax.ws.rs.core.Context;
@@ -38,9 +39,9 @@ public class Proximity {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getJson(@QueryParam("lon0") float lon0, @QueryParam("lat0") float lat0, @QueryParam("lon0") float lon1, @QueryParam("lat1") float lat1) throws URISyntaxException, NoDataException, IOException {
-        ProximityService proximityService = new ProximityService(new Coordinate[] {new Coordinate(lon0, lat0), new Coordinate(lon1, lat1)});
-        proximityService.loadProjectOSRMData();
+        ProximityService proximityService = new ProximityService();
+        ProximityData proximity = proximityService.loadProjectOSRMData(new Coordinates[] {new Coordinates(lon0, lat0), new Coordinates(lon1, lat1)});
         Gson gson = new Gson();
-        return gson.toJson(proximityService, ProximityService.class);
+        return gson.toJson(proximity, ProximityData.class);
     }
 }

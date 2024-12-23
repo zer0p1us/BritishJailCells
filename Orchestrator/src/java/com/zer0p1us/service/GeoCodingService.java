@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.zer0p1us.core.ApiCall;
 import com.zer0p1us.core.HttpToJson;
 import com.zer0p1us.core.misc.NoDataException;
-import com.zer0p1us.endpoints.models.coordinates.Coordinates;
+import com.zer0p1us.endpoints.models.Coordinates;
 import com.zer0p1us.endpoints.models.getTheData.GetTheData;
 import java.net.HttpURLConnection;
 import java.util.HashMap;
