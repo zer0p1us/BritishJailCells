@@ -1,22 +1,17 @@
 package com.zer0p1us.service;
 
 import com.google.gson.Gson;
+import com.zer0p1us.core.ApiCall;
 import com.zer0p1us.core.HttpToJson;
 import com.zer0p1us.core.misc.NoDataException;
+import com.zer0p1us.endpoints.models.Coordinates;
 import com.zer0p1us.endpoints.models.SevenTimer.SevenTimer;
+import com.zer0p1us.endpoints.models.WeatherData;
 import com.zer0p1us.endpoints.models.openMeteo.OpenMeteo;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.ProtocolException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  *
@@ -24,98 +19,69 @@ import java.util.stream.Collectors;
  */
 public class WeatherService {
     
-    private transient float lat;
-    private transient float lon;
+    private String primary_api = "http://www.7timer.info/bin/api.pl?";
+    private String secondary_api = "https://api.open-meteo.com/v1/forecast?";
     
-    private float currentTemp;
-    private float sevenDayAverageTemp;
-    
-    public WeatherService(float lat, float lon) {
-        this.lat = lat;
-        this.lon = lon;
-    }
-    
-    private void load7TimerData() throws URISyntaxException, IOException, NoDataException {
+    private WeatherData load7TimerData(Coordinates coords) throws NoDataException {
         Map<String, String> params = new HashMap<>();
         params.put("product", "civil");
         params.put("unit", "metric");
         params.put("output", "json");
         params.put("lang", "en");
-        params.put("lat", String.valueOf(lat));
-        params.put("lon", String.valueOf(lon));
+        params.put("lat", String.valueOf(coords.latitude));
+        params.put("lon", String.valueOf(coords.longitude));
         
-        String formatedParams = params.entrySet().stream().map(entry -> {
-            try {
-                return URLEncoder.encode(entry.getKey(), "UTF-8") + "=" +
-                       URLEncoder.encode(entry.getValue(), "UTF-8");
-            } catch (UnsupportedEncodingException e) {
-                throw new RuntimeException(e);
-            }
-        }).collect(Collectors.joining("&"));
-        
-        URL url = new URI("http://www.7timer.info/bin/api.pl?" + formatedParams).toURL();
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("GET");
-        con.connect();
+        HttpURLConnection con = ApiCall.GetRequest(primary_api, params);
         
         String json = HttpToJson.getJson(con);
-        if (json.isEmpty()) { throw new NoDataException("7Timer api call "+url.toString()+" json response is empty"); }
+        if (json.isEmpty()) { throw new NoDataException("7Timer api call "+con.getURL()+" json response is empty"); }
         Gson gson = new Gson();
         
         SevenTimer sevenTimer = gson.fromJson(json, SevenTimer.class);
         if (sevenTimer.dataseries.size() == 0) { throw new NoDataException("7Timer json response dataseries is empty"); }
-        currentTemp = sevenTimer.dataseries.get(0).temp2m;
-        sevenDayAverageTemp = (float) sevenTimer.dataseries.stream()
+        WeatherData data = new WeatherData();
+        data.currentTemp = sevenTimer.dataseries.get(0).temp2m;
+        data.sevenDayAverageTemp = (float) sevenTimer.dataseries.stream()
                 .mapToInt(ds -> ds.temp2m)
                 .average()
                 .orElse(0.0f);
+        return data;
     }
     
-    private void loadOpenMeteoData() throws URISyntaxException, ProtocolException, IOException, NoDataException {
+    private WeatherData loadOpenMeteoData(Coordinates coords) throws NoDataException {
         Map<String, String> params = new HashMap<>();
         params.put("hourly", "temperature_2m");
         params.put("current", "temperature_2m");
-        params.put("latitude", String.valueOf(lat));
-        params.put("longitude", String.valueOf(lon));
+        params.put("latitude", String.valueOf(coords.latitude));
+        params.put("longitude", String.valueOf(coords.longitude));
         
-        String formatedParams = params.entrySet().stream().map(entry -> {
-            try {
-                return URLEncoder.encode(entry.getKey(), "UTF-8") + "=" +
-                       URLEncoder.encode(entry.getValue(), "UTF-8");
-            } catch (UnsupportedEncodingException e) {
-                throw new RuntimeException(e);
-            }
-        }).collect(Collectors.joining("&"));
-        
-        URL url = new URI("https://api.open-meteo.com/v1/forecast?" + formatedParams).toURL();
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("GET");
-        con.connect();
+        HttpURLConnection con = ApiCall.GetRequest(secondary_api, params);
         
         String json = HttpToJson.getJson(con);
-        if (json.isEmpty()) { throw new NoDataException("OpenMeteo api call "+url.toString()+" json response is empty"); }
+        if (json.isEmpty()) { throw new NoDataException("OpenMeteo api call "+con.getURL()+" json response is empty"); }
         Gson gson = new Gson();
         
         OpenMeteo openMeteo = gson.fromJson(json, OpenMeteo.class);
-        currentTemp = (float) openMeteo.current.temperature_2m;
-        sevenDayAverageTemp = (float) Arrays.stream(openMeteo.hourly.temperature_2m).average().orElse(0);
+        WeatherData data = new WeatherData();
+        data.currentTemp = (float) openMeteo.current.temperature_2m;
+        data.sevenDayAverageTemp = (float) Arrays.stream(openMeteo.hourly.temperature_2m).average().orElse(0);
+        return data;
     }
     
-    public void loadWeather() {
+    public WeatherData getWeather(Coordinates coords) {
         try {
-            this.load7TimerData();
-            return;
+            return load7TimerData(coords);
         } catch (Exception e) {
             System.err.println("7Timer api call failed due to: "+e.toString());
         }
         
-        
         try {
-            this.loadOpenMeteoData();
-            return;
+            return loadOpenMeteoData(coords);
         } catch (Exception e) {
             System.err.println("OpenMeteo api call failed due to: "+e.toString());
         }
+        
+        return new WeatherData();
     }
     
     
