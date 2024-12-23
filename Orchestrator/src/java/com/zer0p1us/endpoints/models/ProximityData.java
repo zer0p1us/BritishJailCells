@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.zer0p1us.endpoints.models;
 
 /**
@@ -11,4 +7,9 @@ package com.zer0p1us.endpoints.models;
 public class ProximityData {
     public double durationSeconds;
     public double distanceMeters;
+
+    @Override
+    public String toString() {
+        return "durationSeconds:" + this.durationSeconds + ",distanceMeters:" + this.distanceMeters;
+    }
 }

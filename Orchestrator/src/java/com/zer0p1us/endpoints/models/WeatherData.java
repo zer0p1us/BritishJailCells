@@ -7,4 +7,9 @@ package com.zer0p1us.endpoints.models;
 public class WeatherData {
     public float currentTemp;
     public float sevenDayAverageTemp;
+    
+    @Override
+    public String toString() {
+        return "currentTime:" + this.currentTemp + ",sevenDayAverageTemp:" + this.sevenDayAverageTemp;
+    }
 }
