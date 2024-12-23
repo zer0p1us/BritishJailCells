@@ -2,9 +2,11 @@ package com.zer0p1us.core;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Arrays;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -49,11 +51,19 @@ public class CacheManager<Input, CachedData> {
     
     
     private String getKey(Input input) {
-        return input != null ? input.toString() : "null";
+        if (input == null) return "null";
+        if (input.getClass().isArray()) {
+            return Arrays.stream((Object[]) input)
+                .map(item -> item == null ? "null" : item.toString())
+                .collect(Collectors.joining("|"));
+        }
+        return input.toString();
     }
 
     public CachedData getOrCompute(Input input, Function<Input, CachedData> func) {
-        CacheEntry<CachedData> entry = cache.get(getKey(input));
+        String key = getKey(input);
+        LOGGER.info("key: "+key);
+        CacheEntry<CachedData> entry = cache.get(key);
         
         if (entry == null) {
             CacheEntry<CachedData> newEntry = new CacheEntry(func.apply(input));
