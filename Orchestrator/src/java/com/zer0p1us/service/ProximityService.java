@@ -5,7 +5,7 @@ import com.zer0p1us.core.ApiCall;
 import com.zer0p1us.core.CacheManager;
 import com.zer0p1us.core.HttpToJson;
 import com.zer0p1us.core.misc.NoDataException;
-import com.zer0p1us.endpoints.models.ProjectOSRM.ProjectOSRM;
+import com.zer0p1us.endpoints.models.projectOSRM.ProjectOSRM;
 import com.zer0p1us.endpoints.models.Coordinates;
 import com.zer0p1us.endpoints.models.ProximityData;
 import java.io.IOException;

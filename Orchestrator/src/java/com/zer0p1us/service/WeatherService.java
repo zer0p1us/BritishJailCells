@@ -6,7 +6,7 @@ import com.zer0p1us.core.CacheManager;
 import com.zer0p1us.core.HttpToJson;
 import com.zer0p1us.core.misc.NoDataException;
 import com.zer0p1us.endpoints.models.Coordinates;
-import com.zer0p1us.endpoints.models.SevenTimer.SevenTimer;
+import com.zer0p1us.endpoints.models.sevenTimer.SevenTimer;
 import com.zer0p1us.endpoints.models.WeatherData;
 import com.zer0p1us.endpoints.models.openMeteo.OpenMeteo;
 import java.net.HttpURLConnection;
