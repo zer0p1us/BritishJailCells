@@ -13,6 +13,8 @@ public class Coordinates {
         this.longitude = longitude;
     }
     
+    public Coordinates() {}
+    
     @Override
     public String toString() {
         return "latitude:" + this.latitude + ",longitude:" + this.longitude;
