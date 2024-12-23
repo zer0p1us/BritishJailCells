@@ -37,6 +37,6 @@ public class Apply {
     @Consumes(MediaType.APPLICATION_JSON)
     public void putJson(@QueryParam("roomId") String roomId, @QueryParam("userId") String userId) {
         Database db = new Database();
-        db.ApplyForRoom(roomId, userId);
+        db.applyForRoom(roomId, userId);
     }
 }

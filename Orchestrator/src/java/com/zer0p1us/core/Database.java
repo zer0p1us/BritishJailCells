@@ -39,7 +39,7 @@ public class Database {
         
     }
 
-    private ResultSet RunQuery(String sqlQuery) {
+    private ResultSet runQuery(String sqlQuery) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             this.connection = DriverManager.getConnection(this.CONNECTION_STRING);
@@ -64,7 +64,7 @@ public class Database {
      * @param bathroomShared bathroom shared
      * @return 
      */
-    public Rooms GetRooms(String searchTerms,
+    public Rooms getRooms(String searchTerms,
                           Integer maxMonthlyRent,
                           Boolean furnished,
                           Boolean liveInLandlord,
@@ -100,7 +100,7 @@ public class Database {
         if (statement.charAt(statement.length() - 1) == ',') {
             statement.deleteCharAt(statement.length() - 1);
         }
-        ResultSet resultSet = RunQuery(statement.toString());
+        ResultSet resultSet = runQuery(statement.toString());
         
         try {            
             while (resultSet.next()) {
@@ -145,18 +145,18 @@ public class Database {
      * @param roomId room id for application
      * @param userId user id for application, this is really made up by the user
      */
-    public void ApplyForRoom(String roomId, String userId) {
+    public void applyForRoom(String roomId, String userId) {
         StringBuilder statement = new StringBuilder("EXEC ApplyForRoom @room_id = "+roomId+", @user_id = '"+userId+"';");
-        RunQuery(statement.toString());
+        runQuery(statement.toString());
     }
     
     /**
      * Get room application history by room id
      * @param roomId room id
      */
-    public RoomApplications GetRoomHistory(String roomId) {
+    public RoomApplications getRoomHistory(String roomId) {
         StringBuilder statement = new StringBuilder("EXEC GetRoomHistory @room_id = "+roomId+";");
-        ResultSet resultSet = RunQuery(statement.toString());
+        ResultSet resultSet = runQuery(statement.toString());
         RoomApplications roomApplications = new RoomApplications();
         ArrayList<RoomApplication> tempRooms = new ArrayList<RoomApplication>();
         
@@ -184,9 +184,9 @@ public class Database {
      * Cancel room application by application reference
      * @param applicationRef application reference to cancel
      */
-    public void CancelApplication(String applicationRef) {
+    public void cancelApplication(String applicationRef) {
         StringBuilder statement = new StringBuilder("EXEC UpdateApplicationStatus @application_ref = '"+applicationRef+"', @status = 'cancelled';");
-        ResultSet resultSet = RunQuery(statement.toString());
+        ResultSet resultSet = runQuery(statement.toString());
         
     }
 }

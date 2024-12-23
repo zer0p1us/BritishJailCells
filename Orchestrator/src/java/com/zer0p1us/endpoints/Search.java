@@ -45,7 +45,7 @@ public class Search {
                           @QueryParam("billsIncluded") Boolean billsIncluded,
                           @QueryParam("bathroomShared") Boolean bathroomShared) {
         Database db = new Database();
-        Rooms rooms = db.GetRooms(searchTerms,
+        Rooms rooms = db.getRooms(searchTerms,
                                   maxMonthlyRent,
                                   furnished,
                                   liveInLandlord,

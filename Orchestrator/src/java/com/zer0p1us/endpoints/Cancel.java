@@ -34,6 +34,6 @@ public class Cancel {
     @Consumes(MediaType.APPLICATION_JSON)
     public void putJson(@QueryParam("application_ref") String application_ref) {
         Database db = new Database();
-        db.CancelApplication(application_ref);
+        db.cancelApplication(application_ref);
     }
 }
