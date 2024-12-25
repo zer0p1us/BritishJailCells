@@ -33,7 +33,7 @@ public class Cancel {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public void putJson(@QueryParam("application_ref") String application_ref) {
-        Database db = new Database();
+        Database db = Database.getInstance();
         db.cancelApplication(application_ref);
     }
 }

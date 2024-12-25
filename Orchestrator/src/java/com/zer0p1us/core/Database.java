@@ -26,8 +26,18 @@ public class Database {
     private Connection connection;
     private String CONNECTION_STRING;
     
-    public Database() {
+    // Singleton instance
+    private static Database instance;
+    
+    private Database() {
         loadProperties();
+    }
+    
+    public static synchronized Database getInstance() {
+        if (instance == null) {
+            instance = new Database();
+        }
+        return instance;
     }
     
     private void loadProperties() {

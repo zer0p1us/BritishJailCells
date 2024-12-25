@@ -44,7 +44,8 @@ public class Search {
                           @QueryParam("maxSharedWith") Integer maxSharedWith,
                           @QueryParam("billsIncluded") Boolean billsIncluded,
                           @QueryParam("bathroomShared") Boolean bathroomShared) {
-        Database db = new Database();
+        
+        Database db = Database.getInstance();
         Rooms rooms = db.getRooms(searchTerms,
                                   maxMonthlyRent,
                                   furnished,

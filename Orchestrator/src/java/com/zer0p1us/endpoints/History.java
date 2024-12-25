@@ -35,7 +35,7 @@ public class History {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getJson(@QueryParam("roomId") String roomId) {
-        Database db = new Database();
+        Database db = Database.getInstance();
         RoomApplications roomApplications = db.getRoomHistory(roomId);
         Gson gs = new Gson();
         return gs.toJson(roomApplications, RoomApplications.class);
