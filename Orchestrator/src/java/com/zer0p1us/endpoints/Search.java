@@ -2,6 +2,7 @@ package com.zer0p1us.endpoints;
 
 import com.google.gson.Gson;
 import com.zer0p1us.core.Database;
+import com.zer0p1us.endpoints.models.rooms.Room;
 import com.zer0p1us.endpoints.models.rooms.Rooms;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -42,8 +43,11 @@ public class Search {
                           @QueryParam("maxSharedWith") Integer maxSharedWith,
                           @QueryParam("billsIncluded") Boolean billsIncluded,
                           @QueryParam("bathroomShared") Boolean bathroomShared) {
-        
+        long start = System.currentTimeMillis();
         Database db = Database.getInstance();
+        long finish = System.currentTimeMillis();
+        long timeElapsed = finish - start;
+        System.out.println("time taken for db instance: "+timeElapsed+"ms");
         Rooms rooms = db.getRooms(searchTerms,
                                   maxMonthlyRent,
                                   furnished,
@@ -51,7 +55,12 @@ public class Search {
                                   maxSharedWith,
                                   billsIncluded,
                                   bathroomShared);
-        //TODO: Get user geo-location to get cords (cache it) -> weather (cache it) & crime stats (cache it)
+        
+        //TODO: this is really expensive, consider moving this to a separate endpoint
+        for (Room r : rooms.rooms) {
+            r.fetchCoordinates().fetchWeatherData();
+        }
+        
         Gson gson = new Gson();
         return gson.toJson(rooms);
     }
