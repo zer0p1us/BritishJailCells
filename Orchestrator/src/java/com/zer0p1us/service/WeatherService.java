@@ -77,8 +77,8 @@ public class WeatherService {
         SevenTimer sevenTimer = gson.fromJson(json, SevenTimer.class);
         if (sevenTimer.dataseries.size() == 0) { throw new NoDataException("7Timer json response dataseries is empty"); }
         WeatherData data = new WeatherData();
-        data.currentTemp = sevenTimer.dataseries.get(0).temp2m;
-        data.sevenDayAverageTemp = (float) sevenTimer.dataseries.stream()
+        data.currentTempCelsius = sevenTimer.dataseries.get(0).temp2m;
+        data.sevenDayAverageTempCelsius = (float) sevenTimer.dataseries.stream()
                 .mapToInt(ds -> ds.temp2m)
                 .average()
                 .orElse(0.0f);
@@ -99,8 +99,8 @@ public class WeatherService {
         Gson gson = new Gson();
         OpenMeteo openMeteo = gson.fromJson(json, OpenMeteo.class);
         WeatherData data = new WeatherData();
-        data.currentTemp = (float) openMeteo.current.temperature_2m;
-        data.sevenDayAverageTemp = (float) Arrays.stream(openMeteo.hourly.temperature_2m).average().orElse(0);
+        data.currentTempCelsius = (float) openMeteo.current.temperature_2m;
+        data.sevenDayAverageTempCelsius = (float) Arrays.stream(openMeteo.hourly.temperature_2m).average().orElse(0);
         return data;
     }
        
