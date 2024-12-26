@@ -43,11 +43,7 @@ public class Search {
                           @QueryParam("maxSharedWith") Integer maxSharedWith,
                           @QueryParam("billsIncluded") Boolean billsIncluded,
                           @QueryParam("bathroomShared") Boolean bathroomShared) {
-        long start = System.currentTimeMillis();
         Database db = Database.getInstance();
-        long finish = System.currentTimeMillis();
-        long timeElapsed = finish - start;
-        System.out.println("time taken for db instance: "+timeElapsed+"ms");
         Rooms rooms = db.getRooms(searchTerms,
                                   maxMonthlyRent,
                                   furnished,
