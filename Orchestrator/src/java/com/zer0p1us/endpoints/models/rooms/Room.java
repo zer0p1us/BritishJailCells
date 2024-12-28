@@ -18,7 +18,7 @@ public class Room{
     public String availability_date;
     public String[] spoken_languages;
     public Coordinates coordinates;
-    public WeatherData weatherData;
+    public WeatherData weather_data;
 
     public Room fetchCoordinates() {
         GeoCodingService geoService = GeoCodingService.getInstance();
@@ -28,7 +28,7 @@ public class Room{
     
     public Room fetchWeatherData() {
         WeatherService weatherService = WeatherService.getInstance();
-        this.weatherData = weatherService.getWeather(this.coordinates);
+        this.weather_data = weatherService.getWeather(this.coordinates);
         return this;
     }
 }

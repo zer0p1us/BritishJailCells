@@ -6,9 +6,9 @@ package com.zer0p1us.endpoints.models.roomApplication;
  */
 public class RoomApplication {
     
-    public String applicationRef;
-    public String roomId;
-    public String userId;
+    public String application_ref;
+    public String room_id;
+    public String user_id;
     public String status;
     
 }

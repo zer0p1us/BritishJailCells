@@ -173,9 +173,9 @@ public class Database {
         try {
             while (resultSet.next()) {
                 RoomApplication roomApplication = new RoomApplication();
-                roomApplication.applicationRef = resultSet.getString("application_ref");
-                roomApplication.roomId = resultSet.getString("room_id");
-                roomApplication.userId = resultSet.getString("user_id");
+                roomApplication.application_ref = resultSet.getString("application_ref");
+                roomApplication.room_id = resultSet.getString("room_id");
+                roomApplication.user_id = resultSet.getString("user_id");
                 roomApplication.status = resultSet.getString("status");
                 
                 tempRooms.add(roomApplication);
