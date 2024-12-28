@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "client"
+version = "0.1.0"
+description = "BritishJailCell Booking client"
+authors = ["zer01pus <42619260+zer0p1us@users.noreply.github.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pydantic = "^2.10.4"
+Flask = "^3.0.3"
+requests = "^2.32.3"
+
+[tool.poetry.group.dev.dependencies]
+# formatting
+black = "^24.10.0"
+# linting
+flake8 = "^7.1.1"
+flake8-bugbear = "^24.10.34"
+pep8-naming = "^0.14.1"
+# pre commit hooks
+pre-commit = "^4.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
