@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}FridgeOS{% endblock %}</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+
+    <!-- custom stylesheets -->
+    <link rel="stylesheet" href="/static/style.css"
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-light bg-ligth">
+        <div class="container">
+            <label class="navbar-brand" href="/">BritishJailCells</label>
+            <button class="btn btn-outline-secondary" id="theme-toggle" onclick="toggleTheme()">
+                <i id="icon-dark" class="bi bi-moon-fill" style="display: none;"></i>
+                <i id="icon-light" class="bi bi-sun-fill"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container mt-4 mr-2 ml-2 mb-1">
+        {% block page_content %}{% endblock %}
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function toggleTheme() {
+            const htmlElement = document.querySelector('html');
+            const currentTheme = htmlElement.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            htmlElement.setAttribute('data-bs-theme', newTheme);
+
+            const iconDark = document.getElementById('icon-dark');
+            const iconLight = document.getElementById('icon-light');
+            
+            if (newTheme === 'dark') {
+                iconDark.style.display = 'inline';
+                iconLight.style.display = 'none';
+            } else {
+                iconDark.style.display = 'none';
+                iconLight.style.display = 'inline';
+            }
+        }
+    </script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
