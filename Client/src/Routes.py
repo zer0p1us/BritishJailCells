@@ -50,6 +50,7 @@ def home():
 @app_blueprint.route("/search")
 def search():
     search_terms = request.form.get("searchTerms")
+    print(api.BASE_API)
     room_data = api.search(search_terms=search_terms)
     session["room_data"] = room_data.json()
     return redirect("/home")

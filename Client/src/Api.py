@@ -1,3 +1,6 @@
+import configparser
+import os
+
 import requests
 
 from models.Rooms import Rooms
@@ -5,11 +8,34 @@ from models.History import History
 
 
 class Api:
-    BASE_API = "http://localhost:8080/BritishJailCells/api/"
-    SEARCH_API = BASE_API + "search/"
-    APPLY_API = BASE_API + "apply/"
-    CANCEL_API = BASE_API + "cancel/"
-    HISTORY_API = BASE_API + "history/"
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = super(Api, cls).__new__(cls, *args, **kwargs)
+        return cls._instance
+
+    def __init__(self):
+        self.BASE_API = "BritishJailCells/api/"
+
+        config_file_path = os.path.join(
+            os.path.dirname(__file__), "..", "config.properties"
+        )
+        config = configparser.ConfigParser()
+        config.read(config_file_path)
+
+        self.BASE_API = (
+            "http://"
+            + config["orchestrator"]["ip"]
+            + ":"
+            + config["orchestrator"]["port"]
+            + "/"
+            + self.BASE_API
+        )
+        self.SEARCH_API = self.BASE_API + "search/"
+        self.APPLY_API = self.BASE_API + "apply/"
+        self.CANCEL_API = self.BASE_API + "cancel/"
+        self.HISTORY_API = self.BASE_API + "history/"
 
     def search(
         self,
