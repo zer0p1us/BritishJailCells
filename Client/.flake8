@@ -1,0 +1,28 @@
+[flake8]
+max-line-length = 88
+extend-ignore = E203
+max-complexity = 10
+
+# Naming convention rules
+# Variable names should be lowercase with underscores
+# Class names should be PascalCase
+# Function names should be lowercase with underscores
+select = N,B,C,E,F,W,B9
+
+# Show line causing error
+show-source = True
+
+# Errors
+# N801 - class names should use CapWords convention (class names)
+# N802 - function name should be lowercase (function names)
+# N803 - argument name should be lowercase (function arguments)
+# N804 - first argument of a classmethod should be named ‘cls’ (function arguments)
+# N805 - first argument of a method should be named ‘self’ (function arguments)
+# N806 - variable in function should be lowercase
+# N807 - function name should not start and end with ‘__’
+# N811 - constant imported as non constant (constants)
+# N812 - lowercase imported as non-lowercase
+# N813 - camelcase imported as lowercase
+# N814 - camelcase imported as constant (distinct from N817 for selective enforcement) - N815 - mixedCase variable in class scope (constants, method names)
+# N816 - mixedCase variable in global scope (constants)
+# N817 - camelcase imported as acronym (distinct from N814 for selective enforcement) - N818 - error suffix in exception names (exceptions
