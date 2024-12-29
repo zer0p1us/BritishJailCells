@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE ApplyForRoom
+CREATE OR ALTER PROCEDURE sp_apply_for_room
     @room_id INT,
     @user_id NVARCHAR(50)
 AS

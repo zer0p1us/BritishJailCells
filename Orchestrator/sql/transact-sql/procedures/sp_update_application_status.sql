@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE UpdateApplicationStatus
+CREATE OR ALTER PROCEDURE sp_update_application_status
     @application_ref UNIQUEIDENTIFIER,
     @status NVARCHAR(20)
 AS

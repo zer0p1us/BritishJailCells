@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE GetRoomHistory
+CREATE OR ALTER PROCEDURE sp_get_room_history
     @room_id INT
 AS
 BEGIN

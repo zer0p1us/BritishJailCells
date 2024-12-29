@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE SearchRoomDetails
+CREATE OR ALTER PROCEDURE sp_search_room_details
     @SearchTerms NVARCHAR(MAX) = NULL,
     @Furnished BIT = NULL,
     @LiveInLandlord BIT = NULL,
