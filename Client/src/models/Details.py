@@ -1,11 +1,9 @@
-from typing import List
-
 from pydantic import BaseModel
 
 
 class Details(BaseModel):
     furnished: bool
-    amenities: List[str]
+    amenities: list[str]
     live_in_landlord: bool
     shared_with: int
     bills_included: bool

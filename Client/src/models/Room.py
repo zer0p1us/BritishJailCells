@@ -1,4 +1,3 @@
-from typing import List
 from datetime import date
 
 from pydantic import BaseModel
@@ -16,6 +15,6 @@ class Room(BaseModel):
     details: Details
     price_per_month_gbp: int
     availability_date: date
-    spoken_languages: List[str]
+    spoken_languages: list[str]
     coordinates: Coordinates
     weather_data: WeatherData
