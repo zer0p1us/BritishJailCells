@@ -6,16 +6,24 @@ British Jail Cells or BJC as it will referred to is a room booking service.
 
 ## Tooling
 
+**Orchestrator**
 - **NetBeans 23**: for Orchestrator development
-- **Tomcat 90**: for Orchestrator deployment
+- **Tomcat 9.0.96**: for Orchestrator deployment
 - **JDK 23**: Java development kit
 - **Javax EE 8**: Orchestrator environment
-<!-- **DB Browser for SQLite Version 3.13+**: Database tooling, creation, debugging -->
+- **MSSQL & TSQL**: for database
+
+**Client**
+- **Python 3.12+** for language
+- **Flask** for routing
+- **Bootstrap** for UI
+- **Pydantic** for json data serialisation & deserialisation
+- **Requests** for api calls
+- **Poetry** for dependency management
+- **Jinja2** for templating
 
 ## Running
 
-**Create the database**: Create a MSSQL database and run `transact-sql/create.sql` and `transact-sql/populate-db.sql` in that order to create the required table and fill them with some data
+**Orchestrator**: Read through `Orchestrator/README.md` to get it built and running whether locally or remotely
 
-**Config**: Create a new config file like the `mock-config.properties` file, fill in all the fields
-
-**Build Orchestrator**: build the Orchestrator in `netbeans` to produce a war file for the tomcat server
+**Client**: Read through `Client/README.md` to get it running
