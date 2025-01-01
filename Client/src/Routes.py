@@ -2,6 +2,7 @@ from flask import Blueprint, redirect, render_template, request, session
 
 from Api import Api
 from models.Rooms import Rooms
+import Utility
 
 # holds all the routes to be registered in the app file
 app_blueprint = Blueprint("app", __name__)
@@ -55,10 +56,16 @@ def home():
 @app_blueprint.route("/search", methods=["POST", "GET"])
 def search():
     search_terms = request.form.get("searchTerms")
-    furnished = request.form.get("furnished") or None
-    live_in_landlord = request.form.get("liveInLandlord") or None
-    bills_included = request.form.get("billsIncluded") or None
-    bathroom_shared = request.form.get("bathroomShared") or None
+    furnished = Utility.clean_tristate_checkbox_values(request.form.get("furnished"))
+    live_in_landlord = Utility.clean_tristate_checkbox_values(
+        request.form.get("liveInLandlord")
+    )
+    bills_included = Utility.clean_tristate_checkbox_values(
+        request.form.get("billsIncluded")
+    )
+    bathroom_shared = Utility.clean_tristate_checkbox_values(
+        request.form.get("bathroomShared")
+    )
 
     room_data = api.search(
         search_terms=search_terms,

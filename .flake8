@@ -2,6 +2,7 @@
 max-line-length = 88
 extend-ignore = E203
 max-complexity = 10
+ignore = E501
 
 # Naming convention rules
 # Variable names should be lowercase with underscores
