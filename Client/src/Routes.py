@@ -6,7 +6,6 @@ import Utility
 
 # holds all the routes to be registered in the app file
 app_blueprint = Blueprint("app", __name__)
-room_data = None
 api = Api()
 
 
