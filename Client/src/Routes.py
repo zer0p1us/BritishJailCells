@@ -65,6 +65,8 @@ def search():
     bathroom_shared = Utility.clean_tristate_checkbox_values(
         request.form.get("bathroomShared")
     )
+    max_monthly_rent = request.form.get("maxMonthlyRent")
+    max_shared_with = request.form.get("maxSharedWith")
 
     room_data = api.search(
         search_terms=search_terms,
@@ -72,6 +74,8 @@ def search():
         live_in_landlord=live_in_landlord,
         bills_included=bills_included,
         bathroom_shared=bathroom_shared,
+        max_shared_with=max_shared_with,
+        max_monthly_rent=max_monthly_rent,
     )
 
     session["room_data"] = room_data.json()
@@ -80,4 +84,6 @@ def search():
     session["liveInLandlord"] = live_in_landlord
     session["billsIncluded"] = bills_included
     session["bathroomShared"] = bathroom_shared
+    session["maxMonthlyRent"] = max_monthly_rent
+    session["maxSharedWith"] = max_shared_with
     return redirect("/home")
