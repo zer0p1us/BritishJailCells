@@ -11,6 +11,11 @@ api = Api()
 
 @app_blueprint.route("/")
 def main():
+    session["room_data"] = None
+    session["searchTerms"] = None
+    session["furnished"] = None
+    session["liveInLandlord"] = None
+    session["billsIncluded"] = None
     return redirect("/search")
 
 
@@ -50,9 +55,23 @@ def home():
 @app_blueprint.route("/search", methods=["POST", "GET"])
 def search():
     search_terms = request.form.get("searchTerms")
-    furnished = request.form.get("furnished")
-    room_data = api.search(search_terms=search_terms, furnished=furnished)
+    furnished = request.form.get("furnished") or None
+    live_in_landlord = request.form.get("liveInLandlord") or None
+    bills_included = request.form.get("billsIncluded") or None
+    bathroom_shared = request.form.get("bathroomShared") or None
+
+    room_data = api.search(
+        search_terms=search_terms,
+        furnished=furnished,
+        live_in_landlord=live_in_landlord,
+        bills_included=bills_included,
+        bathroom_shared=bathroom_shared,
+    )
+
     session["room_data"] = room_data.json()
     session["searchTerms"] = search_terms
     session["furnished"] = furnished
+    session["liveInLandlord"] = live_in_landlord
+    session["billsIncluded"] = bills_included
+    session["bathroomShared"] = bathroom_shared
     return redirect("/home")

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% from 'table.html' import table %}
+{% from 'tristate_checkbox.html' import tristate_checkbox %}
 
 {% block page_content %}
 
@@ -11,11 +12,13 @@
                 <div class="card-body">
                     <form action="{{ url_for('app.search')}}" method="POST">
                         <div class="row">
-                            <input type="text" class="form-control mb-3" id="searchField" name="searchTerms" placeholder="Search..." value="{{ session['searchTerms'] }}"/>
+                            <input type="text" class="form-control mb-3" id="searchField" name="searchTerms" placeholder="Search..." value="{% if session['searchTerms'] is not none %}{{ session['searchTerms'] }}{% endif %}"/>
                         </div>
                         <div class="col-md-6">
-                            <input class="form-check-input " type="checkbox" id="furnishedField" name="furnished">
-                            <label class="form-check-label" for="furnishedField">Furnished</label>
+                            {{ tristate_checkbox(name="furnished", label="Furnished") }}
+                            {{ tristate_checkbox(name="liveInLandlord", label="Live in Landlord") }}
+                            {{ tristate_checkbox(name="billsIncluded", label="Bills included") }}
+                            {{ tristate_checkbox(name="bathroomShared", label="Shared bathroom") }}
                         </div>
                         <div class="row">
                             <button type="submit" class="btn btn-primary mb-3  rounded shadow-lg">Search</button>
