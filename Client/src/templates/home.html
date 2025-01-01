@@ -14,7 +14,7 @@
                         <div class="row">
                             <input type="text" class="form-control mb-3" id="searchField" name="searchTerms" placeholder="Search..." value="{% if session['searchTerms'] is not none %}{{ session['searchTerms'] }}{% endif %}"/>
                         </div>
-                        <div class="col-md-6">
+                        <div class="row">
                             {{ tristate_checkbox(name="furnished", label="Furnished") }}
                             {{ tristate_checkbox(name="liveInLandlord", label="Live in Landlord") }}
                             {{ tristate_checkbox(name="billsIncluded", label="Bills included") }}
