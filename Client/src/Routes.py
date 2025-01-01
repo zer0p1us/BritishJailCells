@@ -47,9 +47,12 @@ def home():
     return render_template("home.html", headings=headings, data=data)
 
 
-@app_blueprint.route("/search")
+@app_blueprint.route("/search", methods=["POST", "GET"])
 def search():
     search_terms = request.form.get("searchTerms")
-    room_data = api.search(search_terms=search_terms)
+    furnished = request.form.get("furnished")
+    room_data = api.search(search_terms=search_terms, furnished=furnished)
     session["room_data"] = room_data.json()
+    session["searchTerms"] = search_terms
+    session["furnished"] = furnished
     return redirect("/home")

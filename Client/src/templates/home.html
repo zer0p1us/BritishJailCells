@@ -9,19 +9,23 @@
         <div class="row">
             <div class="card shadow rounded mb-3">
                 <div class="card-body">
-                    <div class="row">
-                        <input type="text" class="form-control mb-3" id="searchField" name="searchTerms" placeholder="Search..."/>
-                    </div>
-                    <div class="col-md-6">
-                        <input class="form-check-input " type="checkbox" value="" id="furnishedField">
-                        <label class="form-check-label" for="furnishedField">Furnished</label>
-                    </div>
+                    <form action="{{ url_for('app.search')}}" method="POST">
+                        <div class="row">
+                            <input type="text" class="form-control mb-3" id="searchField" name="searchTerms" placeholder="Search..." value="{{ session['searchTerms'] }}"/>
+                        </div>
+                        <div class="col-md-6">
+                            <input class="form-check-input " type="checkbox" id="furnishedField" name="furnished">
+                            <label class="form-check-label" for="furnishedField">Furnished</label>
+                        </div>
+                        <div class="row">
+                            <button type="submit" class="btn btn-primary mb-3  rounded shadow-lg">Search</button>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="col-md-6">
                 
             </div>
-            <button type="button" class="btn btn-primary mb-3  rounded shadow-lg">Search</button>
         </div>
         {{ table(headings, data) }}
 </div>
