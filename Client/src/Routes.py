@@ -2,6 +2,7 @@ from flask import Blueprint, redirect, render_template, request, session
 
 from Api import Api
 from models.Rooms import Rooms
+from models.Room import Room
 import Utility
 
 # holds all the routes to be registered in the app file
@@ -87,3 +88,22 @@ def search():
     session["maxMonthlyRent"] = max_monthly_rent
     session["maxSharedWith"] = max_shared_with
     return redirect("/home")
+
+
+def get_room_by_id(rooms: Rooms, room_id: int) -> Room | None:
+    for room in rooms.rooms:
+        if room.id == room_id:
+            print(room.name)
+            return room
+    return None
+
+
+@app_blueprint.route("/room")
+def room():
+    room_id = int(request.args.get("id"))
+    room_data = Rooms.model_validate_json(session["room_data"])
+    room_details = get_room_by_id(room_data, room_id)
+    if room_details is None:
+        return render_template("missing_room.html", room_id=room_id)
+
+    return render_template("room.html", name=room_details.name)

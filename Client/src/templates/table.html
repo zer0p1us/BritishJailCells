@@ -5,6 +5,7 @@
             {% for header in headings %}
             <th scope="col">{{ header}}</th>
             {% endfor %}
+            <th scope="col">View</th>
         </tr>
     </thead>
     <tbody>
@@ -17,6 +18,7 @@
 {% macro table_row(data)%}
     {% for row in data %}
     <tr>
+        {% set row_id = row[0] %}
         {% for cell in row %}
         <td>
             {% if cell is boolean %}
@@ -30,6 +32,12 @@
             {% endif %}
         </td>
         {% endfor %}
+        <td>
+            {# Updated button with onclick handler #}
+            <button type="button" class="btn" onclick="window.location.href='{{ url_for('app.room', id=row_id) }}'">
+                <i class="bi bi-three-dots-vertical"></i>
+            </button>
+        </td>
     </tr>
-    {% endfor%}
+    {% endfor %}
 {% endmacro %}
