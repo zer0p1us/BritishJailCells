@@ -26,7 +26,14 @@
     
     <nav class="navbar navbar-light bg-ligth">
         <div class="container">
-            <label class="navbar-brand" href="/">BritishJailCells</label>
+            <a class="navbar-brand" href="/">
+                <div class="row">
+                    <div class="col" style="display: flex; align-items: center;">
+                        <img src="/static/assets/jail.svg" alt="Jail icon" style="height:20px; vertical-align: middle; margin-right: 5px;"/>
+                        BritishJailCells
+                    </div>
+                </div>
+            </a>
             <button class="btn btn-outline-secondary" id="theme-toggle" onclick="toggleTheme()">
                 <i id="icon-dark" class="bi bi-moon-fill" style="display: none;"></i>
                 <i id="icon-light" class="bi bi-sun-fill"></i>
