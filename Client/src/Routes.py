@@ -106,4 +106,26 @@ def room():
     if room_details is None:
         return render_template("missing_room.html", room_id=room_id)
 
-    return render_template("room.html", name=room_details.name)
+    return render_template(
+        "room.html",
+        name=room_details.name,
+        id=room_details.id,
+        monthly_rent=room_details.price_per_month_gbp,
+        current_weather=round(room_details.weather_data.current_temp_celsius, 1),
+        average_weather=round(
+            room_details.weather_data.seven_day_average_temp_celsius, 1
+        ),
+        city=room_details.location.city,
+        county=room_details.location.county,
+        postcode=room_details.location.postcode,
+        latitude=room_details.coordinates.latitude,
+        longitude=room_details.coordinates.longitude,
+        spoken_languages=", ".join(room_details.spoken_languages),
+        available_date=room_details.availability_date.strftime("%d/%m/%Y"),
+        furnished=room_details.details.furnished,
+        amenities=", ".join(room_details.details.amenities),
+        live_in_landlord=room_details.details.live_in_landlord,
+        bathroom_shared=room_details.details.bathroom_shared,
+        bills_included=room_details.details.bills_included,
+        shared_with=room_details.details.shared_with,
+    )

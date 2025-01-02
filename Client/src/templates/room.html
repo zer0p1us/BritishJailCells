@@ -1,12 +1,36 @@
 {% extends "base.html" %}
 
-{% from 'table.html' import table %}
-{% from 'tristate_checkbox.html' import tristate_checkbox %}
+{% from 'room_label.html' import room_label %}
 
 {% block page_content %}
 
 <div class="mt-5">
-        <h1 class="text-center">{{ name }}</h1>
+        <h1 class="text-center">Room id: {{ id }}</h1>
+        <div class="card shadow mb-3">
+            <div class="card-body">
+                {{ room_label("Title:", name) }}
+                {{ room_label("Rent:", "£"+monthly_rent|string) }}
+                <hr data-content="Location" class="hr-text"/>
+                {{ room_label("City", city) }}
+                {{ room_label("County", county) }}
+                {{ room_label("Postcode", postcode) }}
+                {{ room_label("Latitude", latitude) }}
+                {{ room_label("Longitude", longitude) }}
+                <hr data-content="Weather" class="hr-text"/>
+                {{ room_label("Current:", current_weather|string + "°C") }}
+                {{ room_label("7 day average:", average_weather|string + "°C") }}
+                <hr data-content="Details" class="hr-text"/>
+                {{ room_label("Spoken Languages:", spoken_languages) }}
+                {{ room_label("Available date:", available_date) }}
+                {{ room_label("Shared with:", shared_with) }}
+                <hr data-content="Amenities" class="hr-text"/>
+                {{ room_label("Amenities:", amenities) }}
+                {{ room_label("Furnished:", furnished) }}
+                {{ room_label("Live in landlord:", live_in_landlord) }}
+                {{ room_label("Bills included:", bills_included) }}
+                {{ room_label("Bathroom shared:", bathroom_shared) }}
+            </div>
+        </div>
 </div>
 
 {% endblock %}
