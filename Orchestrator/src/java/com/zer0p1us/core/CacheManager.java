@@ -5,12 +5,15 @@ import java.time.Instant;
 import java.util.Arrays;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
  *
  * @author zer0p1us
+ * @param <Input> input type
+ * @param <CachedData> cache data type
  */
 public class CacheManager<Input, CachedData> {
     private final ConcurrentHashMap<String, CacheEntry<CachedData>> cache = new ConcurrentHashMap<>();
@@ -62,26 +65,26 @@ public class CacheManager<Input, CachedData> {
 
     public CachedData getOrCompute(Input input, Function<Input, CachedData> func) {
         String key = getKey(input);
-        LOGGER.info("key: "+key);
+        LOGGER.log(Level.INFO, "key: {0}", key);
         CacheEntry<CachedData> entry = cache.get(key);
         
         if (entry == null) {
             CacheEntry<CachedData> newEntry = new CacheEntry(func.apply(input));
             cache.put(getKey(input), newEntry);
-            LOGGER.info("Created new cache entry with value: " + newEntry.getData().toString());
+            LOGGER.log(Level.INFO, "Created new cache entry with value: {0}", newEntry.getData().toString());
             return newEntry.getData();
         }
         
         // If entry exists and isn't expired, return it
         if (!entry.isExpired(this.cacheLifeInMinutes)) {
-            LOGGER.info("Cache hit! Returning existing value: " + entry.getData().toString());
+            LOGGER.log(Level.INFO, "Cache hit! Returning existing value: {0}", entry.getData().toString());
             return entry.getData();
         }
         
         // Compute new value
         CachedData value = func.apply(input);
         entry.updateCache(value);
-        LOGGER.info("Updated existing cache entry with new value:" + value.toString());
+        LOGGER.log(Level.INFO, "Updated existing cache entry with new value:{0}", value.toString());
         
         return value;
     }

@@ -36,13 +36,7 @@ public class ApiCall {
             con.connect();
             
             return con;
-        } catch (URISyntaxException ex) {
-            Logger.getLogger(ApiCall.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        } catch (ProtocolException ex) {
-            Logger.getLogger(ApiCall.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        } catch (IOException ex) {
+        } catch (URISyntaxException | IOException ex) {
             Logger.getLogger(ApiCall.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }

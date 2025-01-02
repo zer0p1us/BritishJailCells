@@ -82,7 +82,7 @@ public class Database {
                           Boolean billsIncluded,
                           Boolean bathroomShared) {
         Rooms rooms = new Rooms();
-        ArrayList<Room> tempRooms = new ArrayList<Room>();
+        ArrayList<Room> tempRooms = new ArrayList<>();
         
         StringBuilder statement = new StringBuilder("EXEC sp_search_room_details");
         
@@ -156,19 +156,20 @@ public class Database {
      * @param userId user id for application, this is really made up by the user
      */
     public void applyForRoom(String roomId, String userId) {
-        StringBuilder statement = new StringBuilder("EXEC sp_apply_for_room @room_id = "+roomId+", @user_id = '"+userId+"';");
-        runQuery(statement.toString());
+        String statement = "EXEC sp_apply_for_room @room_id = "+roomId+", @user_id = '"+userId+"';";
+        runQuery(statement);
     }
     
     /**
      * Get room application history by room id
      * @param roomId room id
+     * @return 
      */
     public RoomApplications getRoomHistory(String roomId) {
-        StringBuilder statement = new StringBuilder("EXEC sp_get_room_history @room_id = "+roomId+";");
-        ResultSet resultSet = runQuery(statement.toString());
+        String statement = "EXEC sp_get_room_history @room_id = "+roomId+";";
+        ResultSet resultSet = runQuery(statement);
         RoomApplications roomApplications = new RoomApplications();
-        ArrayList<RoomApplication> tempRooms = new ArrayList<RoomApplication>();
+        ArrayList<RoomApplication> tempRooms = new ArrayList<>();
         
         try {
             while (resultSet.next()) {
@@ -195,8 +196,7 @@ public class Database {
      * @param applicationRef application reference to cancel
      */
     public void cancelApplication(String applicationRef) {
-        StringBuilder statement = new StringBuilder("EXEC sp_update_application_status @application_ref = '"+applicationRef+"', @status = 'cancelled';");
-        ResultSet resultSet = runQuery(statement.toString());
-        
+        String statement = "EXEC sp_update_application_status @application_ref = '"+applicationRef+"', @status = 'cancelled';";
+        runQuery(statement);
     }
 }

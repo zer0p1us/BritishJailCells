@@ -7,8 +7,6 @@ import com.zer0p1us.endpoints.models.Coordinates;
 import com.zer0p1us.endpoints.models.ProximityData;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -22,9 +20,6 @@ import javax.ws.rs.core.MediaType;
  */
 @Path("proximity")
 public class Proximity {
-
-    @Context
-    private UriInfo context;
 
     /**
      * Creates a new instance of Proximity

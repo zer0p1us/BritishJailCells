@@ -4,8 +4,6 @@ import com.google.gson.Gson;
 import com.zer0p1us.core.Database;
 import com.zer0p1us.endpoints.models.rooms.Room;
 import com.zer0p1us.endpoints.models.rooms.Rooms;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -20,9 +18,6 @@ import javax.ws.rs.core.MediaType;
 @Path("search")
 public class Search {
 
-    @Context
-    private UriInfo context;
-
     /**
      * Creates a new instance of Search
      */
@@ -32,6 +27,12 @@ public class Search {
     /**
      * Retrieves representation of an instance of com.zer0p1us.endpoints.Search
      * @param searchTerms Search terms
+     * @param maxMonthlyRent
+     * @param furnished
+     * @param liveInLandlord
+     * @param maxSharedWith
+     * @param billsIncluded
+     * @param bathroomShared
      * @return an instance of java.lang.String
      */
     @GET

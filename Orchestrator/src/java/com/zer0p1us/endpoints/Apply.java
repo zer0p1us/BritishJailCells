@@ -1,8 +1,6 @@
 package com.zer0p1us.endpoints;
 
 import com.zer0p1us.core.Database;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
@@ -16,9 +14,6 @@ import javax.ws.rs.core.MediaType;
  */
 @Path("apply")
 public class Apply {
-
-    @Context
-    private UriInfo context;
 
     /**
      * Creates a new instance of Apply
