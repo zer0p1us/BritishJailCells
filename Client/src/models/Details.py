@@ -8,6 +8,3 @@ class Details(BaseModel):
     shared_with: int
     bills_included: bool
     bathroom_shared: bool
-
-    def get_amenities(self) -> str:
-        return ", ".join(str(amenity) for amenity in self.amenities)

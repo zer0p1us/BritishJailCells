@@ -46,7 +46,7 @@ def home():
             room.details.bills_included,
             room.details.bathroom_shared,
             room.details.shared_with,
-            room.details.get_amenities(),
+            ", ".join(room.details.amenities),
         )
         for room in room_data.rooms
     ]
