@@ -197,9 +197,10 @@ public class Database {
     /**
      * Cancel room application by application reference
      * @param applicationRef application reference to cancel
+     * @param userId user id to match the application
      */
-    public void cancelApplication(String applicationRef) {
-        String statement = "EXEC sp_update_application_status @application_ref = '"+applicationRef+"', @status = 'cancelled';";
+    public void cancelApplication(String applicationRef, String userId) {
+        String statement = "EXEC sp_update_application_status @application_ref = '"+applicationRef+"', @status = 'cancelled', @user_id= '"+userId+"';";
         runQuery(statement);
     }
 }

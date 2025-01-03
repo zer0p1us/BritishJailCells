@@ -27,8 +27,8 @@ public class Cancel {
      */
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(@QueryParam("applicationRef") String applicationRef) {
+    public void putJson(@QueryParam("applicationRef") String applicationRef, @QueryParam("userId") String userId) {
         Database db = Database.getInstance();
-        db.cancelApplication(applicationRef);
+        db.cancelApplication(applicationRef, userId);
     }
 }
