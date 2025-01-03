@@ -10,5 +10,6 @@ public class RoomApplication {
     public String room_id;
     public String user_id;
     public String status;
+    public String application_date;
     
 }

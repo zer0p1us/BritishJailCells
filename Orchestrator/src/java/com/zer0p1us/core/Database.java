@@ -12,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -178,6 +179,7 @@ public class Database {
                 roomApplication.room_id = resultSet.getString("room_id");
                 roomApplication.user_id = resultSet.getString("user_id");
                 roomApplication.status = resultSet.getString("status");
+                roomApplication.application_date = resultSet.getString("application_date");
                 
                 tempRooms.add(roomApplication);
             }
