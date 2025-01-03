@@ -2,8 +2,8 @@ package com.zer0p1us.endpoints;
 
 import com.zer0p1us.core.Database;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PUT;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
@@ -26,9 +26,9 @@ public class Apply {
      * @param roomId room id 
      * @param userId user id, this is made up by the user
      */
-    @PUT
+    @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(@QueryParam("roomId") String roomId, @QueryParam("userId") String userId) {
+    public void postJson(@QueryParam("roomId") String roomId, @QueryParam("userId") String userId) {
         Database db = Database.getInstance();
         db.applyForRoom(roomId, userId);
     }
