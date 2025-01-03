@@ -10,8 +10,19 @@ function toggleTheme() {
     if (newTheme === 'dark') {
         iconDark.style.display = 'inline';
         iconLight.style.display = 'none';
+        setThemeStorage('dark');
     } else {
         iconDark.style.display = 'none';
         iconLight.style.display = 'inline';
+        setThemeStorage('light');
     }
+}
+
+function setThemeStorage(themeValue) {
+    fetch('/set_theme', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ theme: themeValue }) });
 }

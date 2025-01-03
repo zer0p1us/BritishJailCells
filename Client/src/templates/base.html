@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
+<html lang="en" data-bs-theme={{ session['theme'] }}>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,8 +35,8 @@
                 </div>
             </a>
             <button class="btn btn-outline-secondary" id="theme-toggle" onclick="toggleTheme()">
-                <i id="icon-dark" class="bi bi-moon-fill" style="display: none;"></i>
-                <i id="icon-light" class="bi bi-sun-fill"></i>
+                <i id="icon-dark" class="bi bi-moon-fill" {% if session['theme'] == "light" %}style="display: none;"{% endif %}></i>
+                <i id="icon-light" class="bi bi-sun-fill" {% if session['theme'] == "dark" %}style="display: none;"{% endif %}></i>
             </button>
         </div>
     </nav>

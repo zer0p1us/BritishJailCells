@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, render_template, request, session
+from flask import Blueprint, redirect, render_template, request, session, jsonify
 
 from Api import Api
 from models.Rooms import Rooms
@@ -17,6 +17,7 @@ def main():
     session["furnished"] = None
     session["liveInLandlord"] = None
     session["billsIncluded"] = None
+    session["theme"] = "light"
     return redirect("/search")
 
 
@@ -117,3 +118,10 @@ def room():
         amenities=", ".join(room_details.details.amenities),
         available_date=room_details.availability_date.strftime("%d/%m/%Y"),
     )
+
+
+@app_blueprint.route("/set_theme", methods=["POST"])
+def set_theme():
+    data = request.get_json()
+    session["theme"] = data["theme"]
+    return jsonify(success=True)
