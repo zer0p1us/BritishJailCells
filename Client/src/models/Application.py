@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from pydantic import BaseModel
 
 
@@ -6,3 +8,4 @@ class Application(BaseModel):
     room_id: str
     user_id: str
     status: str
+    application_date: datetime
