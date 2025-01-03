@@ -1,4 +1,4 @@
-function toggleTheme() {
+export function toggleTheme() {
     const htmlElement = document.querySelector('html');
     const currentTheme = htmlElement.getAttribute('data-bs-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -18,7 +18,7 @@ function toggleTheme() {
     }
 }
 
-function setThemeStorage(themeValue) {
+export function setThemeStorage(themeValue) {
     fetch('/set_theme', {
         method: 'POST',
         headers: {

@@ -1,4 +1,4 @@
-function initializeTristateCheckboxes() {
+export function initializeTristateCheckboxes() {
     const tristateCheckboxes = document.querySelectorAll('.tristate-checkbox');
     
     tristateCheckboxes.forEach(checkbox => {
@@ -14,7 +14,7 @@ function initializeTristateCheckboxes() {
     });
 }
 
-function cycleState(currentState) {
+export function cycleState(currentState) {
     switch(currentState) {
         case 'none':
             return 'true';
@@ -26,7 +26,3 @@ function cycleState(currentState) {
             return 'none';
     }
 }
-
-document.addEventListener('DOMContentLoaded', function() {
-    window.initializeTristateCheckboxes();
-});
