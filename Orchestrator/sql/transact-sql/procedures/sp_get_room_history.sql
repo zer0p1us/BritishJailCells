@@ -6,9 +6,12 @@ BEGIN
         application_ref,
 		room_id,
         user_id,
-        status
+        status,
+        application_date
     FROM 
         applications
     WHERE 
-        room_id = @room_id;
+        room_id = @room_id
+    ORDER BY
+        application_date;
 END

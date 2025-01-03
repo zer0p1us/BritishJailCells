@@ -68,6 +68,7 @@ CREATE TABLE applications (
     room_id INT NOT NULL,
     user_id NVARCHAR(50) NOT NULL,
     status NVARCHAR(20) NOT NULL,
+    application_date DATETIME NOT NULL DEFAULT GETDATE(),
     FOREIGN KEY (room_id) REFERENCES rooms(room_id)
 );
 
