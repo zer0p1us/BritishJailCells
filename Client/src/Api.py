@@ -74,7 +74,9 @@ class Api:
         )
 
     def apply(self, room_id, user_id) -> None:
-        print("apply not implemented")
+        params = {"roomId": str(room_id), "userId": user_id}
+        requests.post(self.APPLY_API, params=params)
 
     def cancel(self, application_ref, user_id) -> None:
-        print("cancel not implemented")
+        params = {"applicationRef": application_ref, "userId": user_id}
+        requests.put(self.CANCEL_API, params=params)
