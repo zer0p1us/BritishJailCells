@@ -12,12 +12,8 @@ api = Api()
 
 @app_blueprint.route("/")
 def main():
-    session["room_data"] = None
-    session["searchTerms"] = None
-    session["furnished"] = None
-    session["liveInLandlord"] = None
-    session["billsIncluded"] = None
-    session["theme"] = "light"
+    if "theme" not in session:
+        session["theme"] = "light"
     return redirect("/search")
 
 
@@ -94,7 +90,6 @@ def search():
 def get_room_by_id(rooms: Rooms, room_id: int) -> Room | None:
     for room in rooms.rooms:
         if room.id == room_id:
-            print(room.name)
             return room
     return None
 
