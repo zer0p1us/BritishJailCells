@@ -55,13 +55,14 @@ public class Database {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             this.connection = DriverManager.getConnection(this.CONNECTION_STRING);
             Statement statement = this.connection.createStatement();
-            ResultSet result = statement.executeQuery(sqlQuery);
-            return result;
+            if (statement.execute(sqlQuery)) {
+                return statement.getResultSet();
+            }
             
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
         }
+        return null;
     }
 
     /**
