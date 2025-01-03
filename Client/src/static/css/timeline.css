@@ -1,0 +1,83 @@
+.timeline {
+    position: relative;
+    padding: 20px 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background: var(--bs-border-color);
+    top: 0;
+    bottom: 0;
+    left: 24px;
+    margin-left: -1px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 30px;
+    margin-left: 40px;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--bs-primary);
+    background-color: var(--bs-body-bg);
+    border-radius: 50%;
+    left: -40px;
+    top: 0;
+}
+
+.timeline-content {
+    padding: 15px;
+    border: 1px solid var(--bs-border-color);
+    border-radius: 4px;
+    background-color: var(--bs-body-bg);
+    position: relative;
+}
+
+.timeline-content::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 8px 8px 0;
+    border-color: transparent var(--bs-border-color) transparent transparent;
+    left: -8px;
+    top: 10px;
+}
+
+.timeline-date {
+    color: var(--bs-secondary);
+    font-size: 0.875rem;
+    margin-bottom: 5px;
+}
+
+.timeline-status {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.status-pending {
+    background-color: var(--bs-warning-bg-subtle);
+    color: var(--bs-warning-text);
+}
+
+.status-approved {
+    background-color: var(--bs-success-bg-subtle);
+    color: var(--bs-success-text);
+}
+
+.status-rejected, .status-cancelled {
+    background-color: var(--bs-danger-bg-subtle);
+    color: var(--bs-danger-text);
+}

@@ -107,6 +107,8 @@ def room():
     if room_details is None:
         return render_template("missing_room.html", room_id=room_id)
 
+    history = api.history(room_details.id)
+
     return render_template(
         "room.html",
         room_data=room_details,
@@ -117,6 +119,7 @@ def room():
         spoken_languages=", ".join(room_details.spoken_languages),
         amenities=", ".join(room_details.details.amenities),
         available_date=room_details.availability_date.strftime("%d/%m/%Y"),
+        history=history,
     )
 
 

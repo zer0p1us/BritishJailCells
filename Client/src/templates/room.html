@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% from 'macros/room_label.html' import room_label %}
+{% from 'macros/timeline.html' import timeline %}
 
 {% block page_content %}
 
@@ -41,6 +42,13 @@
                 <div class="card shadow mb-3">
                     <div class="card-body">
                         <hr data-content="History" class="hr-text"/>
+                        {% if history.applications | length == 0 %}
+                            <div class="row">
+                                <label class="text-muted" style="text-align: center;">Its lonely here <i class="bi bi-emoji-frown"></i></label>
+                            </div>
+                        {% else %}
+                            {{ timeline(history) }}
+                        {% endif %}
                     </div>
                 </div>
             </div>
