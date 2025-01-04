@@ -98,6 +98,39 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="card shadow mb-3">
+                <div class="card-body">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="card shadow mb-3">
+                <div class="card-body">
+                    <form id="geocodingForm" action="{{ url_for('app.geocoding') }}" method="GET">
+                        <hr data-content="GeoCoding" class="hr-text" />
+                        <div class="row">
+                            <div class="col-lg-9 col-md-12 col-sm-12">
+                                <input type="text" class="form-control mb-3" id="postcodeField" name="postcode" placeholder="Postcode..." value="{{ room_data.location.postcode }}"/>
+                            </div>
+                            <div class="col-lg-3 col-md-12 col-sm-12">
+                                <button type="submit" class="btn btn-primary mb-3 rounded w-100">GeoCode</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 cold-md-12 col-sm-12">
+                                <input type="number" class="form-control mb-3" id="geocodingLatitudeField" placeholder="Geocoded latitude..." disabled />
+                            </div>
+                            <div class="col-lg-6 cold-md-12 col-sm-12">
+                                <input type="number" class="form-control mb-3" id="geocodingLongitudeField" placeholder="Geocoded longitude..." disabled />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

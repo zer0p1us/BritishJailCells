@@ -135,6 +135,13 @@ def cancel():
     return redirect(f"/room?id={room_id}")
 
 
+@app_blueprint.route("/geocoding", methods=["GET"])
+def geocoding():
+    postcode = str(request.args.get("postcode")).replace(" ", "")
+    coords = api.geocoding(postcode=postcode)
+    return {"latitude": coords.latitude, "longitude": coords.longitude}
+
+
 @app_blueprint.route("/set_theme", methods=["POST"])
 def set_theme():
     data = request.get_json()
