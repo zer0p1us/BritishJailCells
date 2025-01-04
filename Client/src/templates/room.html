@@ -139,10 +139,10 @@
                     <form id="geocodingForm" action="{{ url_for('app.geocoding') }}" method="GET">
                         <hr data-content="GeoCoding" class="hr-text" />
                         <div class="row">
-                            <div class="col-lg-9 col-md-12 col-sm-12">
+                            <div class="col-lg-8 col-md-12 col-sm-12">
                                 <input type="text" class="form-control mb-3" id="postcodeField" name="postcode" placeholder="Postcode..." value="{{ room_data.location.postcode }}"/>
                             </div>
-                            <div class="col-lg-3 col-md-12 col-sm-12">
+                            <div class="col-lg-4 col-md-12 col-sm-12">
                                 <button type="submit" class="btn btn-primary mb-3 rounded w-100">GeoCode</button>
                             </div>
                         </div>
