@@ -5,6 +5,7 @@ import requests
 
 from models.Rooms import Rooms
 from models.History import History
+from models.Coordinates import Coordinates
 
 
 class Api:
@@ -36,6 +37,7 @@ class Api:
         self.APPLY_API = self.BASE_API + "apply/"
         self.CANCEL_API = self.BASE_API + "cancel/"
         self.HISTORY_API = self.BASE_API + "history/"
+        self.GEOCODING = self.BASE_API + "geocoding/"
 
     def search(
         self,
@@ -80,3 +82,9 @@ class Api:
     def cancel(self, application_ref, user_id) -> None:
         params = {"applicationRef": application_ref, "userId": user_id}
         requests.put(self.CANCEL_API, params=params)
+
+    def geocoding(self, postcode) -> Coordinates:
+        params = {"postcode": postcode}
+        return Coordinates.model_validate_json(
+            requests.get(self.GEOCODING, params=params).text
+        )
