@@ -26,6 +26,7 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(com.zer0p1us.endpoints.Apply.class);
         resources.add(com.zer0p1us.endpoints.Cancel.class);
+        resources.add(com.zer0p1us.endpoints.GeoCoding.class);
         resources.add(com.zer0p1us.endpoints.History.class);
         resources.add(com.zer0p1us.endpoints.Proximity.class);
         resources.add(com.zer0p1us.endpoints.Search.class);
