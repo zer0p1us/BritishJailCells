@@ -1,17 +1,17 @@
 {% macro tristate_checkbox(name, label) %}
     {# Container for the checkbox and its hidden input #}
-    <div class="col-md-6">
+    <div class="d-flex">
         {# Hidden input that holds the actual value #}
-        <input type="hidden" 
-               name="{{ name }}" 
-               id="{{ name }}Value" 
+        <input type="hidden"
+               name="{{ name }}"
+               id="{{ name }}Value"
                class="tristate-value"
                {% if session[name] is not none %}value="{{ session[name]|string|lower }}"{% endif %}
                data-session-key="{{ name }}">
 
         {# Bootstrap icons to emulate tristate checkbox #}
         <div class="form-check">
-            <div class="tristate-checkbox" 
+            <div class="tristate-checkbox"
                  data-target="{{ name }}"
                  data-state="{% if session[name] is none %}none{% else %}{{ session[name]|string|lower }}{% endif %}">
                 <i class="bi bi-square state-none"></i>

@@ -2,11 +2,11 @@
     display: inline-block;
     cursor: pointer;
     font-size: 1.2rem;
-    vertical-align: middle;
 }
 
 .tristate-checkbox i {
     display: none;
+    vertical-align: -0.1em;
 }
 
 /* Show only the relevant icon based on state */
