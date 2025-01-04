@@ -6,42 +6,80 @@
 {% block page_content %}
 
 <div class="mt-5">
-        <h1 class="text-center">Looking for a cell?</h1>
-        <div class="row">
-            <div class="card shadow rounded mb-3">
-                <div class="card-body">
-                    <form action="{{ url_for('app.search')}}" method="POST">
-                        <div class="row">
-                            <input type="text" class="form-control mb-3" id="searchField" name="searchTerms" placeholder="Search..." value="{% if session['searchTerms'] is not none %}{{ session['searchTerms'] }}{% endif %}"/>
+    <h1 class="text-center">Looking for a cell?</h1>
+    <div class="row">
+        <div class="card shadow rounded mb-3">
+            <div class="card-body">
+                <form action="{{ url_for('app.search')}}" method="POST">
+                    <div class="row g-0">
+                        <input type="text" class="form-control mb-3" 
+                                id="searchField"
+                                name="searchTerms"
+                                placeholder="Search..."
+                                value="{% if session['searchTerms'] is not none %}{{ session['searchTerms'] }}{% endif %}"/>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <input type="number"
+                                    class="form-control mb-3"
+                                    id="maxMonthlyRentField"
+                                    name="maxMonthlyRent"
+                                    placeholder="Max monthly rent..."
+                                    value="{% if session['maxMonthlyRent'] is not none%}{{ session['maxMonthlyRent'] }}{% endif %}" />
                         </div>
-                        <div class="row">
-                            <div class="col-6" style="padding-left: 0;">
-                                <input type="number" class="form-control mb-3" id="maxMonthlyRentField" name="maxMonthlyRent" placeholder="Max monthly rent..." value="{% if session['maxMonthlyRent'] is not none%}{{ session['maxMonthlyRent'] }}{% endif %}" />
+                        <div class="col-md-6 col-sm-12">
+                            <input type="number"
+                                    class="form-control mb-3"
+                                    id="maxSharedWithField"
+                                    name="maxSharedWith"
+                                    placeholder="Max shared with..."
+                                    value="{% if session['maxSharedWith'] is not none%}{{ session['maxSharedWith'] }}{% endif %}" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    {{ tristate_checkbox(name="furnished", label="Furnished") }}
+                                </div>
                             </div>
-                            <div class="col-6" style="padding-right: 0;">
-                                <input type="number" class="form-control mb-3" id="maxSharedWithField" name="maxSharedWith" placeholder="Max shared with..." value="{% if session['maxSharedWith'] is not none%}{{ session['maxSharedWith'] }}{% endif %}" />
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    {{ tristate_checkbox(name="liveInLandlord", label="Live in Landlord") }}
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
-                            {{ tristate_checkbox(name="furnished", label="Furnished") }}
-                            {{ tristate_checkbox(name="liveInLandlord", label="Live in Landlord") }}
-                            {{ tristate_checkbox(name="billsIncluded", label="Bills included") }}
-                            {{ tristate_checkbox(name="bathroomShared", label="Shared bathroom") }}
+                        <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    {{ tristate_checkbox(name="billsIncluded", label="Bills included") }}
+                                </div>
+                            </div>
                         </div>
-                        <div class="row">
-                            <button type="submit" class="btn btn-primary mb-3 rounded">Search</button>
+                        <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    {{ tristate_checkbox(name="bathroomShared", label="Shared bathroom") }}
+                                </div>
+                            </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="row g-0">
+                        <button type="submit" class="btn btn-primary mb-3 rounded">Search</button>
+                    </div>
+                </form>
             </div>
         </div>
-        <div class="row">
-            <div class="card shadow rounded">
-                <div class="card-body table-container">
-                    {{ table(headings, data) }}
-                </div>
+    </div>
+    <div class="row">
+        <div class="card shadow rounded">
+            <div class="card-body table-container">
+                {{ table(headings, data) }}
             </div>
         </div>
+    </div>
 </div>
 
 {% endblock %}
