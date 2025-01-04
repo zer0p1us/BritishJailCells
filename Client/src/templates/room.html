@@ -53,7 +53,49 @@
                 </div>
             </div>
         </div>
-
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="card shadow mb-3">
+                    <div class="card-body">
+                        <form action="{{ url_for('app.apply')}}" method="POST">
+                            <hr data-content="Apply" class="hr-text"/>
+                            <div class="row">
+                                <div class="col-lg-5 col-md-12 col-sm-12">
+                                    <input type="text" class="form-control mb-3" id="roomIdField" name="room_id" placeholder="Room id..." value="{{ room_data.id }}"/>
+                                </div>
+                                <div class="col-lg-5 col-md-12 col-sm-12">
+                                    <input type="text" class="form-control mb-3" id="userIdField" name="user_id" placeholder="User id..."/>
+                                </div>
+                                <div class="col-lg-2 col-md-12 col-sm-12">
+                                    <button type="submit" class="btn btn-primary mb-3 rounded shadow-lg w-100">Apply</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="card shadow mb-3">
+                    <div class="card-body">
+                        <form action="{{ url_for('app.cancel')}}" method="POST">
+                            <hr data-content="Cancel Application" class="hr-text" />
+                            <div class="row">
+                                <div class="col-lg-6 col-md-12 col-sm-12">
+                                    <input type="text" class="form-control mb-3" id="applicationRefField" name="application_ref" placeholder="Application Ref..."/>
+                                </div>
+                                <div class="col-lg-4 col-md-12 col-sm-12">
+                                    <input type="text" class="form-control mb-3" id="userIdField" name="user_id" placeholder="User id..."/>
+                                </div>
+                                <div class="col-lg-2 col-md-12 col-sm-12">
+                                    <button type="submit" class="btn btn-primary mb-3 rounded shadow-lg w-100">Cancel</button>
+                                </div>
+                            </div>
+                            <input type="hidden" name="room_id" value="{{ room_data.id }}"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 </div>
 
 {% endblock %}

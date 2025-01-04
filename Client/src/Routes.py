@@ -118,6 +118,23 @@ def room():
     )
 
 
+@app_blueprint.route("/apply", methods=["POST"])
+def apply():
+    room_id = int(request.form.get("room_id"))
+    user_id = request.form.get("user_id")
+    api.apply(room_id=room_id, user_id=user_id)
+    return redirect(f"/room?id={room_id}")
+
+
+@app_blueprint.route("/cancel", methods=["POST"])
+def cancel():
+    application_ref = request.form.get("application_ref")
+    room_id = int(request.form.get("room_id"))
+    user_id = request.form.get("user_id")
+    api.cancel(application_ref=application_ref, user_id=user_id)
+    return redirect(f"/room?id={room_id}")
+
+
 @app_blueprint.route("/set_theme", methods=["POST"])
 def set_theme():
     data = request.get_json()
