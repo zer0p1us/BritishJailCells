@@ -1,13 +1,7 @@
 .timeline {
     position: relative;
     padding: 20px 0;
-    /* Bootstrap md and bigger */
-    @media (min-width: 768px) {
-        /* Height of the room details card */
-        max-height: 666px; 
-        overflow-y: auto;
-    }
-
+    
 }
 
 .timeline::before {
@@ -45,6 +39,15 @@
     border-radius: 4px;
     background-color: var(--bs-body-bg);
     position: relative;
+}
+
+.timeline-container {
+    /* Bootstrap md and bigger */
+    @media (min-width: 768px) {
+        /* Height of the room details card */
+        max-height: 666px; 
+        overflow-y: auto;
+    }
 }
 
 .timeline-content::before {

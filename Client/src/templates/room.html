@@ -49,7 +49,9 @@
                             <label class="text-muted" style="text-align: center;">Its lonely here <i class="bi bi-emoji-frown"></i></label>
                         </div>
                     {% else %}
-                        {{ timeline(history) }}
+                        <div class="timeline-container">
+                            {{ timeline(history) }}
+                        </div>
                     {% endif %}
                 </div>
             </div>
