@@ -1,5 +1,5 @@
-import {toggleTheme, setThemeStorage} from './toggle_theme.js';
-import {initializeTristateCheckboxes, cycleState} from './tristate_checkbox.js';
+import {toggleTheme, setThemeStorage} from './toggleTheme.js';
+import {initializeTristateCheckboxes, cycleState} from './tristateCheckbox.js';
 import {loadGeoCodingResults} from './geoCodingForm.js';
 
 // theme toggle setup
