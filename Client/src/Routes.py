@@ -3,6 +3,7 @@ from flask import Blueprint, redirect, render_template, request, session, jsonif
 from Api import Api
 from models.Rooms import Rooms
 from models.Room import Room
+from models.Coordinates import Coordinates
 import Utility
 
 # holds all the routes to be registered in the app file
@@ -133,6 +134,23 @@ def cancel():
     user_id = request.form.get("user_id")
     api.cancel(application_ref=application_ref, user_id=user_id)
     return redirect(f"/room?id={room_id}")
+
+
+@app_blueprint.route("/proximity", methods=["GET"])
+def proximity():
+    lat_0 = float(request.args.get("lat_0"))
+    lon_0 = float(request.args.get("lon_0"))
+    lon_1 = float(request.args.get("lon_1"))
+    lat_1 = float(request.args.get("lat_1"))
+
+    start = Coordinates(latitude=lat_0, longitude=lon_0)
+    end = Coordinates(latitude=lat_1, longitude=lon_1)
+    proximity_data = api.proximity(start=start, end=end)
+
+    return {
+        "durationSeconds": proximity_data.duration_seconds,
+        "distanceMeters": proximity_data.distance_meters,
+    }
 
 
 @app_blueprint.route("/geocoding", methods=["GET"])

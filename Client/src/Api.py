@@ -6,6 +6,7 @@ import requests
 from models.Rooms import Rooms
 from models.History import History
 from models.Coordinates import Coordinates
+from models.ProximityData import ProximityData
 
 
 class Api:
@@ -37,6 +38,7 @@ class Api:
         self.APPLY_API = self.BASE_API + "apply/"
         self.CANCEL_API = self.BASE_API + "cancel/"
         self.HISTORY_API = self.BASE_API + "history/"
+        self.PROXIMITY_API = self.BASE_API + "proximity/"
         self.GEOCODING = self.BASE_API + "geocoding/"
 
     def search(
@@ -82,6 +84,18 @@ class Api:
     def cancel(self, application_ref, user_id) -> None:
         params = {"applicationRef": application_ref, "userId": user_id}
         requests.put(self.CANCEL_API, params=params)
+
+    def proximity(self, start: Coordinates, end: Coordinates) -> ProximityData:
+        params = {
+            "lat0": start.latitude,
+            "lon0": start.longitude,
+            "lat1": end.latitude,
+            "lon1": end.longitude,
+        }
+        print(f"param: {params}")
+        return ProximityData.model_validate_json(
+            requests.get(self.PROXIMITY_API, params=params).text
+        )
 
     def geocoding(self, postcode) -> Coordinates:
         params = {"postcode": postcode}
