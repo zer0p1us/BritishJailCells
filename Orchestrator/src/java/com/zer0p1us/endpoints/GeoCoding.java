@@ -29,6 +29,7 @@ public class GeoCoding {
 
     /**
      * Retrieves representation of an instance of com.zer0p1us.endpoints.GeoCoding
+     * @param postcode postcode to GeoCode
      * @return an instance of java.lang.String
      */
     @GET
