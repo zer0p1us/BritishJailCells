@@ -11,8 +11,8 @@ export function calculateProximity(formSelector, durationFieldSelector, distance
             url: url,
             data: formData, // Send the serialized form data
             success: function(response) {
-                $(durationFieldSelector).val(response.durationSeconds);
-                $(distanceFieldSelector).val(response.distanceMeters);
+                $(durationFieldSelector).val(response.duration_seconds);
+                $(distanceFieldSelector).val(response.distance_meters);
             },
             error: function() {
                 alert('An error occurred while fetching proximity data.');

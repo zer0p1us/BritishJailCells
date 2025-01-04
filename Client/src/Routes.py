@@ -147,17 +147,14 @@ def proximity():
     end = Coordinates(latitude=lat_1, longitude=lon_1)
     proximity_data = api.proximity(start=start, end=end)
 
-    return {
-        "durationSeconds": proximity_data.duration_seconds,
-        "distanceMeters": proximity_data.distance_meters,
-    }
+    return jsonify(proximity_data.dict())
 
 
 @app_blueprint.route("/geocoding", methods=["GET"])
 def geocoding():
     postcode = str(request.args.get("postcode")).replace(" ", "")
     coords = api.geocoding(postcode=postcode)
-    return {"latitude": coords.latitude, "longitude": coords.longitude}
+    return jsonify(coords.dict())
 
 
 @app_blueprint.route("/set_theme", methods=["POST"])
