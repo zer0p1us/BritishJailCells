@@ -86,8 +86,8 @@ public class ProximityService {
         if (projectOSRM.routes.length == 0) { throw new NoDataException("ProjectOSRM json response dataseries is empty"); }
         
         ProximityData proximity = new ProximityData();
-        proximity.distanceMeters = projectOSRM.routes[0].distance;
-        proximity.durationSeconds = projectOSRM.routes[0].duration;
+        proximity.distance_meters = projectOSRM.routes[0].distance;
+        proximity.duration_seconds = projectOSRM.routes[0].duration;
         return proximity;
     }
 }
