@@ -6,98 +6,98 @@
 {% block page_content %}
 
 <div class="mt-5">
-        <h1 class="text-center">Room id: {{ room_data.id }}</h1>
-        <div class="row d-flex">
-            <div class="col-md-6 col-sm-12 d-flex">
-                <div class="card shadow mb-3 flex-grow-1">
-                    <div class="card-body">
-                        <hr data-content="General" class="hr-text"/>
-                        {{ room_label("Title:", room_data.name) }}
-                        {{ room_label("Rent:", "£"+room_data.price_per_month_gbp|string) }}
-                        
-                        <hr data-content="Location" class="hr-text"/>
-                        {{ room_label("City", room_data.location.city) }}
-                        {{ room_label("County", room_data.location.county) }}
-                        {{ room_label("Postcode", room_data.location.postcode) }}
-                        {{ room_label("Latitude", room_data.coordinates.latitude) }}
-                        {{ room_label("Longitude", room_data.coordinates.longitude) }}
+    <h1 class="text-center">Room id: {{ room_data.id }}</h1>
+    <div class="row d-flex">
+        <div class="col-md-6 col-sm-12 d-flex">
+            <div class="card shadow mb-3 flex-grow-1">
+                <div class="card-body">
+                    <hr data-content="General" class="hr-text"/>
+                    {{ room_label("Title:", room_data.name) }}
+                    {{ room_label("Rent:", "£"+room_data.price_per_month_gbp|string) }}
+                    
+                    <hr data-content="Location" class="hr-text"/>
+                    {{ room_label("City", room_data.location.city) }}
+                    {{ room_label("County", room_data.location.county) }}
+                    {{ room_label("Postcode", room_data.location.postcode) }}
+                    {{ room_label("Latitude", room_data.coordinates.latitude) }}
+                    {{ room_label("Longitude", room_data.coordinates.longitude) }}
 
-                        <hr data-content="Weather" class="hr-text"/>
-                        {{ room_label("Current:", current_weather|string + "°C") }}
-                        {{ room_label("7 day average:", average_weather|string + "°C") }}
-                        
-                        <hr data-content="Details" class="hr-text"/>
-                        {{ room_label("Spoken Languages:", spoken_languages) }}
-                        {{ room_label("Available date:", available_date) }}
-                        {{ room_label("Shared with:", room_data.details.shared_with|string) }}
+                    <hr data-content="Weather" class="hr-text"/>
+                    {{ room_label("Current:", current_weather|string + "°C") }}
+                    {{ room_label("7 day average:", average_weather|string + "°C") }}
+                    
+                    <hr data-content="Details" class="hr-text"/>
+                    {{ room_label("Spoken Languages:", spoken_languages) }}
+                    {{ room_label("Available date:", available_date) }}
+                    {{ room_label("Shared with:", room_data.details.shared_with|string) }}
 
-                        <hr data-content="Amenities" class="hr-text"/>
-                        {{ room_label("Amenities:", amenities) }}
-                        {{ room_label("Furnished:", room_data.details.furnished) }}
-                        {{ room_label("Live in landlord:", room_data.details.live_in_landlord) }}
-                        {{ room_label("Bills included:", room_data.details.bills_included) }}
-                        {{ room_label("Bathroom shared:", room_data.details.bathroom_shared) }}
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-12 d-flex">
-                <div class="card shadow mb-3 flex-grow-1">
-                    <div class="card-body">
-                        <hr data-content="History" class="hr-text"/>
-                        {% if history.applications | length == 0 %}
-                            <div class="row">
-                                <label class="text-muted" style="text-align: center;">Its lonely here <i class="bi bi-emoji-frown"></i></label>
-                            </div>
-                        {% else %}
-                            {{ timeline(history) }}
-                        {% endif %}
-                    </div>
+                    <hr data-content="Amenities" class="hr-text"/>
+                    {{ room_label("Amenities:", amenities) }}
+                    {{ room_label("Furnished:", room_data.details.furnished) }}
+                    {{ room_label("Live in landlord:", room_data.details.live_in_landlord) }}
+                    {{ room_label("Bills included:", room_data.details.bills_included) }}
+                    {{ room_label("Bathroom shared:", room_data.details.bathroom_shared) }}
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6 col-sm-12">
-                <div class="card shadow mb-3">
-                    <div class="card-body">
-                        <form action="{{ url_for('app.apply')}}" method="POST">
-                            <hr data-content="Apply" class="hr-text"/>
-                            <div class="row">
-                                <div class="col-lg-5 col-md-12 col-sm-12">
-                                    <input type="text" class="form-control mb-3" id="roomIdField" name="room_id" placeholder="Room id..." value="{{ room_data.id }}"/>
-                                </div>
-                                <div class="col-lg-5 col-md-12 col-sm-12">
-                                    <input type="text" class="form-control mb-3" id="userIdField" name="user_id" placeholder="User id..."/>
-                                </div>
-                                <div class="col-lg-2 col-md-12 col-sm-12">
-                                    <button type="submit" class="btn btn-primary mb-3 rounded shadow-lg w-100">Apply</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-12">
-                <div class="card shadow mb-3">
-                    <div class="card-body">
-                        <form action="{{ url_for('app.cancel')}}" method="POST">
-                            <hr data-content="Cancel Application" class="hr-text" />
-                            <div class="row">
-                                <div class="col-lg-6 col-md-12 col-sm-12">
-                                    <input type="text" class="form-control mb-3" id="applicationRefField" name="application_ref" placeholder="Application Ref..."/>
-                                </div>
-                                <div class="col-lg-4 col-md-12 col-sm-12">
-                                    <input type="text" class="form-control mb-3" id="userIdField" name="user_id" placeholder="User id..."/>
-                                </div>
-                                <div class="col-lg-2 col-md-12 col-sm-12">
-                                    <button type="submit" class="btn btn-primary mb-3 rounded shadow-lg w-100">Cancel</button>
-                                </div>
-                            </div>
-                            <input type="hidden" name="room_id" value="{{ room_data.id }}"/>
-                        </form>
-                    </div>
+        <div class="col-md-6 col-sm-12 d-flex">
+            <div class="card shadow mb-3 flex-grow-1">
+                <div class="card-body">
+                    <hr data-content="History" class="hr-text"/>
+                    {% if history.applications | length == 0 %}
+                        <div class="row">
+                            <label class="text-muted" style="text-align: center;">Its lonely here <i class="bi bi-emoji-frown"></i></label>
+                        </div>
+                    {% else %}
+                        {{ timeline(history) }}
+                    {% endif %}
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="card shadow mb-3">
+                <div class="card-body">
+                    <form action="{{ url_for('app.apply')}}" method="POST">
+                        <hr data-content="Apply" class="hr-text"/>
+                        <div class="row">
+                            <div class="col-lg-5 col-md-12 col-sm-12">
+                                <input type="text" class="form-control mb-3" id="roomIdField" name="room_id" placeholder="Room id..." value="{{ room_data.id }}"/>
+                            </div>
+                            <div class="col-lg-5 col-md-12 col-sm-12">
+                                <input type="text" class="form-control mb-3" id="userIdField" name="user_id" placeholder="User id..."/>
+                            </div>
+                            <div class="col-lg-2 col-md-12 col-sm-12">
+                                <button type="submit" class="btn btn-primary mb-3 rounded shadow-lg w-100">Apply</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="card shadow mb-3">
+                <div class="card-body">
+                    <form action="{{ url_for('app.cancel')}}" method="POST">
+                        <hr data-content="Cancel Application" class="hr-text" />
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 col-sm-12">
+                                <input type="text" class="form-control mb-3" id="applicationRefField" name="application_ref" placeholder="Application Ref..."/>
+                            </div>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <input type="text" class="form-control mb-3" id="userIdField" name="user_id" placeholder="User id..."/>
+                            </div>
+                            <div class="col-lg-2 col-md-12 col-sm-12">
+                                <button type="submit" class="btn btn-primary mb-3 rounded shadow-lg w-100">Cancel</button>
+                            </div>
+                        </div>
+                        <input type="hidden" name="room_id" value="{{ room_data.id }}"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
