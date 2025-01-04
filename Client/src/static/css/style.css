@@ -1,4 +1,9 @@
 @import "table.css";
 @import "tristate_checkbox.css";
 @import "horizontal_break.css";
-@import "timeline.css"
+@import "timeline.css";
+
+.overflow-auto {
+    max-height: 100%;
+    overflow-y: auto;
+}

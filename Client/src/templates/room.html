@@ -7,10 +7,10 @@
 
 <div class="mt-5">
         <h1 class="text-center">Room id: {{ room_data.id }}</h1>
-        <div class="row">
-            <div class="col-md-6 col-sm-12">
-                <div class="card shadow mb-3">
-                    <div class="card-body">
+        <div class="row d-flex">
+            <div class="col-md-6 col-sm-12 d-flex">
+                <div class="card shadow mb-3 flex-grow-1 flex-shrink-1">
+                    <div class="card-body overflow-auto">
                         <hr data-content="General" class="hr-text"/>
                         {{ room_label("Title:", room_data.name) }}
                         {{ room_label("Rent:", "£"+room_data.price_per_month_gbp|string) }}
@@ -38,9 +38,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-sm-12">
-                <div class="card shadow mb-3">
-                    <div class="card-body">
+            <div class="col-md-6 col-sm-12 d-flex">
+                <div class="card shadow mb-3 flex-grow-1 flex-shrink-1">
+                    <div class="card-body overflow-auto">
                         <hr data-content="History" class="hr-text"/>
                         {% if history.applications | length == 0 %}
                             <div class="row">
