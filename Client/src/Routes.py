@@ -1,4 +1,5 @@
 from flask import Blueprint, redirect, render_template, request, session, jsonify
+from requests import ConnectionError as RequestConnectionError
 
 from Api import Api
 from models.Rooms import Rooms
@@ -67,15 +68,20 @@ def search():
     max_monthly_rent = request.form.get("maxMonthlyRent")
     max_shared_with = request.form.get("maxSharedWith")
 
-    room_data = api.search(
-        search_terms=search_terms,
-        furnished=furnished,
-        live_in_landlord=live_in_landlord,
-        bills_included=bills_included,
-        bathroom_shared=bathroom_shared,
-        max_shared_with=max_shared_with,
-        max_monthly_rent=max_monthly_rent,
-    )
+    try:
+        room_data = api.search(
+            search_terms=search_terms,
+            furnished=furnished,
+            live_in_landlord=live_in_landlord,
+            bills_included=bills_included,
+            bathroom_shared=bathroom_shared,
+            max_shared_with=max_shared_with,
+            max_monthly_rent=max_monthly_rent,
+        )
+    except RequestConnectionError:
+        return render_template(
+            "/error.html", message="Server not responding to search queries"
+        )
 
     session["room_data"] = room_data.json()
     session["searchTerms"] = search_terms
@@ -100,10 +106,16 @@ def room():
     room_id = int(request.args.get("id"))
     room_data = Rooms.model_validate_json(session["room_data"])
     room_details = get_room_by_id(room_data, room_id)
-    if room_details is None:
-        return render_template("missing_room.html", room_id=room_id)
 
-    history = api.history(room_details.id)
+    if room_details is None:
+        return render_template("/error.html", message=f"Room id: {room_id} not found!")
+
+    try:
+        history = api.history(room_details.id)
+    except RequestConnectionError:
+        return render_template(
+            "/error.html", message="Server not responding to history query!"
+        )
 
     return render_template(
         "room.html",
@@ -123,7 +135,12 @@ def room():
 def apply():
     room_id = int(request.form.get("room_id"))
     user_id = request.form.get("user_id")
-    api.apply(room_id=room_id, user_id=user_id)
+    try:
+        api.apply(room_id=room_id, user_id=user_id)
+    except RequestConnectionError:
+        return render_template(
+            "/error.html", message="Server not responding to application!"
+        )
     return redirect(f"/room?id={room_id}")
 
 
@@ -132,7 +149,12 @@ def cancel():
     application_ref = request.form.get("application_ref")
     room_id = int(request.form.get("room_id"))
     user_id = request.form.get("user_id")
-    api.cancel(application_ref=application_ref, user_id=user_id)
+    try:
+        api.cancel(application_ref=application_ref, user_id=user_id)
+    except RequestConnectionError:
+        return render_template(
+            "/error.html", message="Server not responding to application cancellation!"
+        )
     return redirect(f"/room?id={room_id}")
 
 
