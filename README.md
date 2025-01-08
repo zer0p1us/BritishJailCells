@@ -9,7 +9,7 @@ British Jail Cells or BJC as it will referred to is a room booking service.
 **Orchestrator**
 - **NetBeans 23**: for Orchestrator development
 - **Tomcat 9.0.96**: for Orchestrator deployment
-- **JDK 23**: Java development kit
+- **JDK 21**: Java development kit
 - **Javax EE 8**: Orchestrator environment
 - **MSSQL & TSQL**: for database
 
