@@ -4,6 +4,14 @@ Third year Server-Centric Cloud computing coursework.
 
 British Jail Cells or BJC as it will referred to is a room booking service.
 
+## Showcase
+
+General look and feel, light/dark mode & responsiveness of the client:
+
+<video controls>
+  <source src="res/general.mp4" type="video/mp4">
+</video>
+
 ## Tooling
 
 **Orchestrator**
