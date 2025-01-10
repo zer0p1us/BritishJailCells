@@ -6,11 +6,19 @@ British Jail Cells or BJC as it will referred to is a room booking service.
 
 ## Showcase
 
-General look and feel, light/dark mode & responsiveness of the client:
+General look and feel, light/dark mode & responsiveness of the client in the demo video below
 
-<video controls>
-  <source src="res/general.mp4" type="video/mp4">
+
+<video width="640" height="600" controls>
+    <!-- Local path for local rendering -->
+    <source src="./res/general.mp4" type="video/mp4">
+    <!-- GitHub path as fallback, doesn't work right now because of size -->
+    <source src="https://github.com/zer0p1us/BritishJailCells/blob/main/res/general.mp4?raw=true" type="video/mp4">
+    Your browser does not support the video tag.
 </video>
+
+https://github.com/user-attachments/assets/2dcdc1fe-95e6-40e4-ab21-2c7f2bb76343
+
 
 ## Tooling
 
